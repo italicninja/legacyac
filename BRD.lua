@@ -2,22 +2,22 @@ local profile = {};
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
 local sets = {
-    Idle = {
-        Main = { Name = 'Kali', AugPath='C' },
-        Sub = 'Genmei Shield',
-        Range = { Name = 'Gjallarhorn', AugTrial=3591 },
-        Head = 'Nyame Helm',
+    ['idle'] = {
+        Main = 'Paper Knife',
+        Sub = 'Minstrel\'s Dagger',
+        Range = 'Ryl.Spr. Horn',
+        Head = 'Noble\'s Ribbon',
         Neck = 'Bird Whistle',
-        Ear1 = 'Odnowa Earring +1',
-        Ear2 = 'Etiolation Earring',
-        Body = 'Nyame Mail',
-        Hands = 'Fili Manchettes +1',
-        Ring1 = 'Hope Ring +1',
-        Ring2 = 'Hope Ring +1',
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
-        Waist = 'Fucho-no-Obi',
-        Legs = 'Assid. Pants +1',
-        Feet = 'Volte Gaiters',
+        Ear1 = 'Beetle Earring +1',
+        Ear2 = 'Beetle Earring +1',
+        Body = 'Savage Separates',
+        Hands = 'Savage Gauntlets',
+        Ring1 = 'Hope Ring',
+        Ring2 = 'Hope Ring',
+        Back = 'Lizard Mantle +1',
+        Waist = 'Warrior\'s Belt +1',
+        Legs = 'Savage Loincloth',
+        Feet = 'Savage Gaiters',
     },
     Resting = {},
     Idle_Regen = {
@@ -31,16 +31,7 @@ local sets = {
         Feet = 'Volte Gaiters',
     },
     Town = {
-        Main = { Name = 'Kali', AugPath='C' },
-        Sub = 'Culminus',
-        Range = 'Daurdabla',
-        Head = 'Pixie Hairpin +1',
-        Neck = 'Mnbw. Whistle +1',
-        Body = 'Fili Hongreline +1',
-        Hands = 'Fili Manchettes +1',
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
-        Legs = 'Brioso Cannions +2',
-        Feet = 'Fili Cothurnes +1',
+
     },
 
     Dt = {
@@ -59,23 +50,21 @@ local sets = {
         Feet = 'Nyame Sollerets',
     },
 
-    Tp_Default = {
-        Main = 'Naegling',
-        Sub = 'Genmei Shield',
-        Range = 'Linos',
-        Head = 'Nyame Helm',
-        Neck = { Name = 'Bard\'s Charm +1', AugPath='A' },
-        Ear1 = 'Telos Earring',
-        Ear2 = 'Cessance Earring',
-        Body = { Name = 'Bihu Jstcorps. +3', AugTrial=5481 },
-        Hands = 'Nyame Gauntlets',
-        Ring1 = 'Ilabrat Ring',
-        Ring2 = 'Chirich Ring +1',
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Accuracy+20', [2] = '"Store TP"+10', [3] = 'Attack+20', [4] = 'DEX+20' } },
-        Waist = { Name = 'Sailfi Belt +1', AugPath='A' },
-        Legs = 'Nyame Flanchard',
-        Feet = 'Bihu Slippers +3',
+    ['Tp_Default'] = {
+        Head = 'Dodge Headband',
+        Neck = 'Wing Pendant',
+        Ear1 = 'Beetle Earring +1',
+        Ear2 = 'Beetle Earring +1',
+        Body = 'Savage Separates',
+        Hands = 'Savage Gauntlets',
+        Ring1 = 'Courage Ring',
+        Ring2 = 'Courage Ring',
+        Back = 'Lizard Mantle +1',
+        Waist = 'Warrior\'s Belt +1',
+        Legs = 'Savage Loincloth',
+        Feet = 'Savage Gaiters',
     },
+
     Tp_Hybrid = {
     },
     Tp_Acc = {
@@ -111,27 +100,25 @@ local sets = {
         Head = 'Umuthi Hat',
         Waist = 'Siegel Sash',
     },
-    Song_Precast = { --87
-        Main = 'Bihu Knife', --20
-        Sub = 'Genmei Shield',
-        Range = { Name = 'Gjallarhorn', AugTrial=3591 },
-        Head = 'Fili Calot +1', --14
-        Neck = { Name = 'Loricate Torque +1', AugPath='A' },
-        Ear1 = 'Eabani Earring',
-        Ear2 = 'Etiolation Earring', --1
-        Body = 'Inyanga Jubbah +2', --14
-        Hands = 'Leyline Gloves', --6
-        Ring1 = 'Defending Ring',
-        Ring2 = 'Kishar Ring', --5
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
-        Waist = 'Embla Sash', --5
-        Legs = 'Aya. Cosciales +2', --6
-        Feet = 'Volte Gaiters', --6
+    ['Song_Precast'] = {
+        Main = 'Paper Knife',
+        Sub = 'Minstrel\'s Dagger',
+        Range = 'Royal Spearman\'s Horn',
+        Head = 'Noble\'s Ribbon',
+        Neck = 'Bird Whistle',
+        Ear1 = 'Beetle Earring +1',
+        Ear2 = 'Beetle Earring +1',
+        Body = 'Savage Separates',
+        Hands = 'Savage Gauntlets',
+        Ring1 = 'Hope Ring',
+        Ring2 = 'Hope Ring',
+        Back = 'Lizard Mantle +1',
+        Waist = 'Warrior\'s Belt +1',
+        Legs = 'Savage Loincloth',
+        Feet = 'Savage Gaiters',
     },
 
     Cure = {--I cap is 50, II cap is 30
-        Main = 'Bunzi\'s Rod',--I 30
-        Sub = 'Ammurapi Shield',
         Ammo = 'Pemphredo Tathlum',
         Neck = 'Nodens Gorget',--I 5
         Ear1 = 'Mendi. Earring',--I 5
@@ -344,22 +331,6 @@ local sets = {
     Movement = {
         Feet = 'Fili Cothurnes +1',
 	},
-    ['bard'] = {
-        Main = 'Dream Bell +1',
-        Range = 'Ryl.Spr. Horn',
-        Head = 'Noble\'s Ribbon',
-        Neck = 'Bird Whistle',
-        Ear1 = 'Onyx Earring',
-        Ear2 = 'Onyx Earring',
-        Body = 'Savage Separates',
-        Hands = 'Savage Gauntlets',
-        Ring1 = 'Hope Ring',
-        Ring2 = 'Hope Ring',
-        Back = 'Cape',
-        Waist = 'Friar\'s Rope',
-        Legs = 'Savage Loincloth',
-        Feet = 'Savage Gaiters',
-    },
 };
 profile.Sets = sets;
 
@@ -373,6 +344,7 @@ profile.OnLoad = function()
 
     AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
     AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+    --AshitaCore:GetChatManager():QueueCommand(1, '/lockstyle on');
 end
 
 profile.OnUnload = function()

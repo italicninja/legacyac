@@ -1,4 +1,7 @@
 {
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    },
     "Lua.diagnostics.disable": [
         "undefined-global",
         "undefined-field"

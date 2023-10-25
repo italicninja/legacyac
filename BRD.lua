@@ -454,7 +454,7 @@ profile.HandleMidcast = function()
         else
             gFunc.EquipSet(sets.Buff);
         end
-        if (string.contains(spell.Name, 'Requiem')) or (string.contains(spell.Name, 'Elegy')) or (string.contains(spell.Name, 'Threnody')) or (string.contains(spell.Name, 'Finale')) or (string.contains(spell.Name, 'Lullaby')) then
+        if (string.contains(spell.Name, 'Requiem')) or (string.contains(spell.Name, 'Elegy')) or (string.contains(spell.Name, 'Finale')) or (string.contains(spell.Name, 'Lullaby')) then
             gFunc.EquipSet(sets.Wind);
         end
         if (string.contains(spell.Name, 'Horde Lullaby')) then
@@ -464,7 +464,7 @@ profile.HandleMidcast = function()
         elseif (string.contains(spell.Name, 'March')) then
             gFunc.EquipSet(sets.March);
         elseif (string.contains(spell.Name, 'Madrigal')) then
-            gFunc.EquipSet(sets.Madrigal);
+            gFunc.Equip("range", "Traversiere +1")
 		elseif (string.contains(spell.Name, 'Minne')) then
             gFunc.EquipSet(sets.Minne);
 		elseif (string.contains(spell.Name, 'Minuet')) then

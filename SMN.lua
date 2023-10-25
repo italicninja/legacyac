@@ -1,5 +1,7 @@
 ---@diagnostic disable: undefined-global
 
+gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
+
 local staff = {
     ['Fire'] = 'Vulkan\'s Staff',
     ['Earth'] = 'Earth Staff',
@@ -29,15 +31,13 @@ local profile = {}
 profile.Sets = {
 	Idle = {
 		main = staff["Fire"],
-		Ammo = "Fortune Egg",
+		Ammo = "Hedgehog Bomb",
 		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
 		Ear1 = "Beastly earring",
 		Ear2 = "Death Earring",
 		Body = "Evoker's Doublet",
 		Hands = "Evoker's Bracers",
-		Ring1 = "Evoker's Ring",
-		Ring2 = "Astral Ring",
 		Back = "Summoner's Cape",
 		Waist = "Hierarch Belt",
 		Legs = "Evoker's Spats",
@@ -61,8 +61,8 @@ profile.Sets = {
 		Neck = "Ajari Necklace",
 		Body = "Evoker's Doublet",
 		Hands = "Mycophile Cuffs",
-		Ring1 = "Astral Ring",
-		Ring2 = "Astral Ring",
+		Ring1 = "Evoker's Ring",
+		Ring2 = "Tamas Ring",
 		Back = "Summoner's Cape",
 		Waist = "Penitent's Rope",
 		Legs = "Evoker's Spats",
@@ -76,6 +76,8 @@ profile.Sets = {
 		Body = "Shep. Tunic",
 		Hands = "Austere Cuffs",
 		Feet = "Shep. Boots",
+		Ring1 = "Evoker's Ring",
+		Ring2 = "Tamas Ring",
 	},
 	petAtk = {
 		Head = "Shep. Bonnet",
@@ -87,6 +89,7 @@ profile.Sets = {
 		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
 		Hands = "Austere Cuffs",
+		Ring1 = "Evoker's Ring",
 	},
 	petMacc = {
 		Head = "Evoker's Horn",
@@ -99,20 +102,34 @@ profile.Sets = {
 		Hands = "Austere Cuffs",
 		Body = "Austere Robe",
 	},
-	["sync40"] = {
-		Main = "Kukulcan's Staff",
-		Head = "Horn Hairpin +1",
-		Neck = "Justice Badge",
-		Ear1 = "Onyx Earring",
-		Ear2 = "Onyx Earring",
-		Body = "Seer's Tunic +1",
-		Hands = "Carbuncle Mitts",
-		Ring1 = "Astral Ring",
-		Ring2 = "Astral Ring",
-		Waist = "Friar's Rope",
-		Legs = "Savage Loincloth",
-		Feet = "Savage Gaiters",
-	},
+	['sync40'] = {
+        Main = 'Kukulcan\'s Staff',
+        Head = 'Horn Hairpin +1',
+        Neck = 'Justice Badge',
+        Ear1 = 'Onyx Earring',
+        Ear2 = 'Onyx Earring',
+        Body = 'Seer\'s Tunic +1',
+        Hands = 'Carbuncle Mitts',
+        Ring1 = 'Astral Ring',
+        Ring2 = 'Tamas Ring',
+        Back = 'Cape +1',
+        Waist = 'Friar\'s Rope',
+        Legs = 'Savage Loincloth',
+        Feet = 'Savage Gaiters',
+    },
+	Town = {
+
+    },
+	Idle_Regen = {
+        Neck = 'Bathy Choker +1',
+    },
+    Idle_Refresh = {
+        Feet = 'Volte Gaiters',
+    },
+	Dt = {
+    },
+	pet_Dt = {
+    },
 }
 
 profile.Packer = {}
@@ -220,13 +237,16 @@ end
 profile.OnLoad = function()
 	gSettings.AllowAddSet = true
 	gSettings.AllowSyncEquip = false
+    gcinclude.Initialize();
 	SetMacros(bookSMN, pageIdle)
 	--AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 1');
 end
 
 profile.OnUnload = function() end
 
-profile.HandleCommand = function(args) end
+profile.HandleCommand = function(args)
+    gcinclude.HandleCommands(args);
+end
 
 profile.HandleDefault = function()
 	local petAction = gData.GetPetAction()
@@ -254,6 +274,9 @@ profile.HandleDefault = function()
 			gFunc.Equip("head", "Summoner's Horn")
 		end
 	end
+	gcinclude.CheckDefault ();
+    if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(sets.Dt) end;
+    if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(sets.Movement) end;
 end
 
 profile.HandleAbility = function()
@@ -278,6 +301,10 @@ profile.HandleMidcast = function()
 	local action = gData.GetAction()
 	if action.Name:contains("Cur") then
 		gFunc.EquipSet(profile.Sets.Cure)
+	elseif action.Name:contains("Sneak") then
+		gFunc.Equip("feet", "Dream Boots +1")
+	elseif action.Name:contains("Invisible") then
+		gFunc.Equip("hands", "Dream Mittens +1")
 	elseif action.Name == "Stoneskin" then
 		gFunc.EquipSet(profile.Sets.Stoneskin)
 	elseif action.Skill == "Elemental Magic" then

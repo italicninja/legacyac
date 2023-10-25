@@ -55,7 +55,7 @@ gcinclude.settings = {
 	You can also set any of these on a per job basis in the job file in the OnLoad function. See my COR job file to see how this is done
 	but as an example you can just put 'gcinclude.settings.RefreshGearMPP = 50;' in your job files OnLoad function to modify for that job only
 	]]
-	Messages = false; --set to true if you want chat log messages to appear on any /gc command used such as DT, TH, or KITE gear toggles, certain messages will always appear
+	Messages = true; --set to true if you want chat log messages to appear on any /gc command used such as DT, TH, or KITE gear toggles, certain messages will always appear
 	AutoGear = true; --set to false if you dont want DT/Regen/Refresh/PetDT gear to come on automatically at the defined %'s here
 	WScheck = true; --set to false if you dont want to use the WSdistance safety check
 	WSdistance = 4.7; --default max distance (yalms) to allow non-ranged WS to go off at if the above WScheck is true
@@ -64,7 +64,7 @@ gcinclude.settings = {
 	DTGearHPP = 40; -- set HPP to have your DT set to come on
 	PetDTGearHPP = 50; -- set pet HPP to have your PetDT set to come on
 	MoonshadeTP = 2250; -- this is the TP amount you want to equip EAR2 with moonshade earring when you have less than this amount, set to 0 if you dont want to use at all
-	Tele_Ring = 'Dim. Ring (Dem)'; -- put your tele ring in here
+	Tele_Ring = 'Tavnazian Ring'; -- put your tele ring in here
 };
 
 --[[
@@ -73,7 +73,7 @@ in each individual job lua file. Unless you know what you're doing then it is be
 ]]
 gcdisplay = gFunc.LoadFile('common\\gcdisplay.lua');
 
-gcinclude.AliasList = T{'gcmessages','wsdistance','setcycle','dt','th','kite','meleeset','gcdrain','gcaspir','nukeset','burst','weapon','elecycle','helix','weather','nuke','death','fight','sir','tankset','proc','cj','pupmode','tpgun','cormsg','forcestring','siphon','warpring','telering','rrset','craftset','zeniset','fishset'};
+gcinclude.AliasList = T{'gcmessages','wsdistance','setcycle','dt','th','kite','meleeset','gcdrain','gcaspir','nukeset','burst','weapon','elecycle','helix','weather','nuke','death','fight','sir','tankset','proc','cj','pupmode','tpgun','cormsg','forcestring','siphon','warpring','telering','rrset','craftset','zeniset','fishset', 'tavring'};
 gcinclude.Towns = T{'Tavnazian Safehold','Al Zahbi','Aht Urhgan Whitegate','Nashmau','Southern San d\'Oria [S]','Bastok Markets [S]','Windurst Waters [S]','San d\'Oria-Jeuno Airship','Bastok-Jeuno Airship','Windurst-Jeuno Airship','Kazham-Jeuno Airship','Southern San d\'Oria','Northern San d\'Oria','Port San d\'Oria','Chateau d\'Oraguille','Bastok Mines','Bastok Markets','Port Bastok','Metalworks','Windurst Waters','Windurst Walls','Port Windurst','Windurst Woods','Heavens Tower','Ru\'Lude Gardens','Upper Jeuno','Lower Jeuno','Port Jeuno','Rabao','Selbina','Mhaura','Kazham','Norg','Mog Garden','Celennia Memorial Library','Western Adoulin','Eastern Adoulin'};
 gcinclude.LockingRings = T{'Echad Ring', 'Trizek Ring', 'Endorsement Ring', 'Capacity Ring', 'Warp Ring','Facility Ring','Dim. Ring (Dem)','Dim. Ring (Mea)','Dim. Ring (Holla)'};
 gcinclude.DistanceWS = T{'Flaming Arrow','Piercing Arrow','Dulling Arrow','Sidewinder','Blast Arrow','Arching Arrow','Empyreal Arrow','Refulgent Arrow','Apex Arrow','Namas Arrow','Jishnu\'s Randiance','Hot Shot','Split Shot','Sniper Shot','Slug Shot','Blast Shot','Heavy Shot','Detonator','Numbing Shot','Last Stand','Coronach','Wildfire','Trueflight','Leaden Salute','Myrkr','Dagan','Moonlight','Starlight'};
@@ -177,10 +177,10 @@ function gcinclude.HandleCommands(args)
 	if args[1] == 'gcmessages' then
 		if gcinclude.settings.Messages then
 			gcinclude.settings.Messages = false;
-			print(chat.header('GCinclude'):append(chat.message('Chat messanges are disabled')));
+			print(chat.header('GCinclude'):append(chat.message('Chat messages are disabled')));
 		else
 			gcinclude.settings.Messages = true;
-			print(chat.header('GCinclude'):append(chat.message('Chat messanges are enabled')));
+			print(chat.header('GCinclude'):append(chat.message('Chat messages are enabled')));
 		end
 	elseif (args[1] == 'wsdistance') then
 		if (tonumber(args[2])) then 
@@ -221,6 +221,8 @@ function gcinclude.HandleCommands(args)
 		gcinclude.DoWarpRing();
 	elseif (args[1] == 'telering') then
 		gcinclude.DoTeleRing();
+	elseif (args[1] == 'tavring') then
+		gcinclude.DoTavRing();
 	elseif (args[1] == 'rrset') then
 		gcinclude.RRSET = not gcinclude.RRSET;
 		toggle = 'Reraise Set';
@@ -490,6 +492,20 @@ function gcinclude.DoTeleRing()
 		forceidleset:once(8);
 	end
 	usering:once(11);
+end
+
+function gcinclude.DoTavRing()
+
+	AshitaCore:GetChatManager():QueueCommand(1, '/lac equip ring2 "Tavnazian Ring"');
+
+	local function usering()
+		local function forceidleset()
+			AshitaCore:GetChatManager():QueueCommand(1, '/lac set Idle');
+		end
+		AshitaCore:GetChatManager():QueueCommand(1, '/item "Tavnazian Ring" <me>');
+		forceidleset:once(8);
+	end
+	usering:once(31);
 end
 
 function gcinclude.DoNukes(tier)

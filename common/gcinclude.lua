@@ -535,6 +535,143 @@ function gcinclude.DoCORmsg(roll)
 	end
 end
 
+-- Define the song names, corresponding recast times (in seconds) and type. Order is important Highest Tier -> Lowest
+local songs = {
+    -- { type = "", id =878, name = 'Dark Threnody II'},
+    -- { type = "", id =877, name = 'Light Threnody II'},
+    -- { type = "", id =876, name = 'Water Threnody II'},
+    -- { type = "", id =875, name = 'Ltng. Threnody II'},
+    -- { type = "", id =874, name = 'Earth Threnody II'},
+    -- { type = "", id =873, name = 'Wind Threnody II'},
+    -- { type = "", id =872, name = 'Ice Threnody II'},
+    -- { type = "", id =871, name = 'Fire Threnody II'},
+    -- { type = "", id =472, name = 'Pining Nocturne'},
+    -- { type = "", id =471, name = 'Foe Lullaby II'},
+    -- { type = "", id =470, name = 'Sentinel\'s Scherzo'},
+    -- { type = "", id =469, name = 'Adventurer\'s Dirge'},
+    -- { type = "", id =468, name = 'Foe Sirvente'},
+    -- { type = "", id =467, name = 'Raptor Mazurka'},
+    -- { type = "", id =466, name = 'Maiden\'s Virelai'},
+    -- { type = "", id =465, name = 'Chocobo Mazurka'},
+    -- { type = "", id =464, name = 'Goddess\'s Hymnus'},
+    -- { type = "", id =463, name = 'Foe Lullaby'},
+    -- { type = "", id =462, name = 'Magic Finale'},
+    -- { type = "", id =461, name = 'Dark Threnody'},
+    -- { type = "", id =460, name = 'Light Threnody'},
+    -- { type = "", id =459, name = 'Water Threnody'},
+    -- { type = "", id =458, name = 'Ltng. Threnody'},
+    -- { type = "", id =457, name = 'Earth Threnody'},
+    -- { type = "", id =456, name = 'Wind Threnody'},
+    -- { type = "", id =455, name = 'Ice Threnody'},
+    -- { type = "", id =454, name = 'Fire Threnody'},
+    -- { type = "", id =453, name = 'Dark Carol II'},
+    -- { type = "", id =452, name = 'Light Carol II'},
+    -- { type = "", id =451, name = 'Water Carol II'},
+    -- { type = "", id =450, name = 'Lightning Carol II'},
+    -- { type = "", id =449, name = 'Earth Carol II'},
+    -- { type = "", id =448, name = 'Wind Carol II'},
+    -- { type = "", id =447, name = 'Ice Carol II'},
+    -- { type = "", id =446, name = 'Fire Carol II'},
+    -- { type = "", id =445, name = 'Dark Carol'},
+    -- { type = "", id =444, name = 'Light Carol'},
+    -- { type = "", id =443, name = 'Water Carol'},
+    -- { type = "", id =442, name = 'Lightning Carol'},
+    -- { type = "", id =441, name = 'Earth Carol'},
+    -- { type = "", id =440, name = 'Wind Carol'},
+    -- { type = "", id =439, name = 'Ice Carol'},
+    -- { type = "", id =438, name = 'Fire Carol'},
+    -- { type = "", id =437, name = 'Bewitching Etude'},
+    -- { type = "", id =436, name = 'Logical Etude'},
+    -- { type = "", id =435, name = 'Sage Etude'},
+    -- { type = "", id =434, name = 'Swift Etude'},
+    -- { type = "", id =433, name = 'Vital Etude'},
+    -- { type = "", id =432, name = 'Uncanny Etude'},
+    -- { type = "", id =431, name = 'Herculean Etude'},
+    -- { type = "", id =430, name = 'Enchanting Etude'},
+    -- { type = "", id =429, name = 'Spirited Etude'},
+    -- { type = "", id =428, name = 'Learned Etude'},
+    -- { type = "", id =427, name = 'Quick Etude'},
+    -- { type = "", id =426, name = 'Vivacious Etude'},
+    -- { type = "", id =425, name = 'Dextrous Etude'},
+    -- { type = "", id =424, name = 'Sinewy Etude'},
+    -- { type = "", id =423, name = 'Massacre Elegy'},
+    -- { type = "", id =422, name = 'Carnage Elegy'},
+    -- { type = "", id =421, name = 'Battlefield Elegy'},
+    -- { type = "", id =420, name = 'Victory March'},
+    -- { type = "", id =419, name = 'Advancing March'},
+    -- { type = "", id =418, name = 'Protected Aria'},
+    -- { type = "", id =417, name = 'Honor March'},
+    -- { type = "", id =416, name = 'Cactuar Fugue'},
+    -- { type = "", id =415, name = 'Goblin Gavotte'},
+    -- { type = "", id =414, name = 'Warding Round'},
+    -- { type = "", id =413, name = 'Devotee Serenade'},
+    -- { type = "", id =412, name = 'Gold Capriccio'},
+    -- { type = "", id =411, name = 'Jester\'s Operetta'},
+    -- { type = "", id =410, name = 'Puppet\'s Operetta'},
+    -- { type = "", id =409, name = 'Scop\'s Operetta'},
+    -- { type = "", id =408, name = 'Shining Fantasia'},
+    -- { type = "", id =407, name = 'Chocobo Hum'},
+    -- { type = "", id =406, name = 'Herb Pastoral'},
+    -- { type = "", id =405, name = 'Fowl Aubade'},
+    -- { type = "", id =404, name = 'Dragonfoe Mambo'},
+    -- { type = "", id =403, name = 'Sheepfoe Mambo'},
+    -- { type = "", id =402, name = 'Archer\'s Prelude'},
+    -- { type = "", id =401, name = 'Hunter\'s Prelude'},
+    -- { type = "", id =400, name = 'Blade Madrigal'},
+    -- { type = "", id =399, name = 'Sword Madrigal'},
+    -- { type = "", id =398, name = 'Valor Minuet V'},
+    -- { type = "", id =397, name = 'Valor Minuet IV'},
+    -- { type = "", id =396, name = 'Valor Minuet III'},
+    -- { type = "", id =395, name = 'Valor Minuet II'},
+    -- { type = "", id =394, name = 'Valor Minuet'},
+    -- { type = "", id =393, name = 'Knight\'s Minne V'},
+    -- { type = "", id =392, name = 'Knight\'s Minne IV'},
+    -- { type = "", id =391, name = 'Knight\'s Minne III'},
+    -- { type = "", id =390, name = 'Knight\'s Minne II'},
+    -- { type = "", id =389, name = 'Knight\'s Minne'},
+    -- { type = "", id =388, name = 'Mage\'s Ballad III'},
+    -- { type = "", id =387, name = 'Mage\'s Ballad II'},
+    -- { type = "", id =386, name = 'Mage\'s Ballad'},
+    { type = "Paeon", id =383, name = 'Army\'s Paeon VI', level = 78},
+    { type = "Paeon", id =382, name = 'Army\'s Paeon V', level = 65},
+    { type = "Paeon", id =381, name = 'Army\'s Paeon IV', level = 45},
+    { type = "Paeon", id =380, name = 'Army\'s Paeon III', level = 35},
+    { type = "Paeon", id =379, name = 'Army\'s Paeon II', level = 15},
+    { type = "Paeon", id =378, name = 'Army\'s Paeon', level = 5},
+    -- { type = "", id =377, name = 'Horde Lullaby II'},
+    -- { type = "", id =376, name = 'Horde Lullaby'},
+    -- { type = "", id =375, name = 'Foe Requiem VIII'},
+    -- { type = "", id =374, name = 'Foe Requiem VII'},
+    -- { type = "", id =373, name = 'Foe Requiem VI'},
+    -- { type = "", id =372, name = 'Foe Requiem V'},
+    -- { type = "", id =371, name = 'Foe Requiem IV'},
+    -- { type = "", id =370, name = 'Foe Requiem III'},
+    -- { type = "", id =369, name = 'Foe Requiem II'},
+    -- { type = "", id =368, name = 'Foe Requiem'}
+}
+
+
+
+-- Function to cast the appropriate song
+function gcinclude.castSong(songType)
+	local player = AshitaCore:GetMemoryManager():GetPlayer()
+	--print(chat.header('GCinclude'):append(chat.message("My Level " .. player:GetMainJobLevel())));
+    for _, song in ipairs(songs) do
+        if song.type == songType then
+            local macroCommand = '/ma "' .. song.name .. '" <me>'
+            local recast = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(song.id);
+			--print(chat.header('GCinclude'):append(chat.message("Song ID: " .. song.id .. " Song Name: " .. song.name .. " Recast: " .. recast)));
+
+			if (recast == 0) and (song.level <= player:GetMainJobLevel()) then
+				--print(chat.header('GCinclude'):append(chat.message("Recast == 0, So casting " .. song.name)));
+				AshitaCore:GetChatManager():QueueCommand(1, macroCommand);
+				--print(chat.header('GCinclude'):append(chat.message(song.name)));
+                return
+            end
+        end
+    end
+end
+
 function gcinclude.DoAspir()
 	local player = AshitaCore:GetMemoryManager():GetPlayer();
 	local recast1 = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(247);
@@ -770,6 +907,10 @@ function gcinclude.Initialize()
 	gcdisplay.Initialize:once(2);
 	gcinclude.SetVariables:once(2);
 	gcinclude.SetAlias:once(2);
+end
+
+function gcinclude.DebugChat(msg)
+	print(chat.header('GCinclude'):append(chat.message(msg)));
 end
 
 return gcinclude;

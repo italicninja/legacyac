@@ -52,7 +52,7 @@ local sets = {
 
     ['Tp_Default'] = {
         Head = 'Dodge Headband',
-        Neck = 'Wing Pendant',
+        Neck = 'Peacock Amulet',
         Ear1 = 'Beetle Earring +1',
         Ear2 = 'Beetle Earring +1',
         Body = 'Savage Separates',
@@ -268,7 +268,7 @@ local sets = {
         Range = 'Cornette +1',
     },
     March = {
-        Hands = 'Royal Spearman\'s Horn',
+        Range = 'Ryl.Spr. Horn',
     },
     Madrigal = {
         Head = 'Fili Calot +1',
@@ -472,6 +472,8 @@ profile.HandleMidcast = function()
         elseif (string.contains(spell.Name, 'Scherzo')) then
             gFunc.EquipSet(sets.Scherzo);
         elseif (string.contains(spell.Name, 'Ballad')) then
+            gFunc.EquipSet(sets.Ballad);
+        elseif (string.contains(spell.Name, 'Threnody')) then
             gFunc.EquipSet(sets.Ballad);
         end
 

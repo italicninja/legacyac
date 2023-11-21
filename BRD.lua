@@ -5,18 +5,15 @@ local sets = {
     ['idle'] = {
         Main = 'Paper Knife',
         Sub = 'Minstrel\'s Dagger',
-        Range = 'Ryl.Spr. Horn',
-        Head = 'Noble\'s Ribbon',
+        Range = 'Royal Spearman\'s Horn',
+        Head = 'Choral Roundlet',
         Neck = 'Bird Whistle',
-        Ear1 = 'Beetle Earring +1',
-        Ear2 = 'Beetle Earring +1',
-        Body = 'Savage Separates',
-        Hands = 'Savage Gauntlets',
+        Body = 'Choral Jstcorps',
+        Hands = 'Choral Cuffs',
         Ring1 = 'Hope Ring',
         Ring2 = 'Hope Ring',
-        Back = 'Lizard Mantle +1',
-        Waist = 'Warrior\'s Belt +1',
-        Legs = 'Savage Loincloth',
+        Waist = 'Corsette',
+        Legs = 'Choral Cannions',
         Feet = 'Savage Gaiters',
     },
     Resting = {},
@@ -77,7 +74,7 @@ local sets = {
         Sub = 'Genmei Shield',
         Range = { Name = 'Gjallarhorn', AugTrial=3591 },
         Head = 'Haruspex Hat', --8
-        Neck = 'Baetyl Pendant', --4
+        Neck = 'Bird Whistle',
         Ear1 = 'Eabani Earring',
         Ear2 = 'Etiolation Earring', --1
         Body = 'Inyanga Jubbah +2', --14
@@ -104,33 +101,21 @@ local sets = {
         Main = 'Paper Knife',
         Sub = 'Minstrel\'s Dagger',
         Range = 'Royal Spearman\'s Horn',
-        Head = 'Noble\'s Ribbon',
+        Head = 'Choral Roundlet',
         Neck = 'Bird Whistle',
-        Ear1 = 'Beetle Earring +1',
-        Ear2 = 'Beetle Earring +1',
-        Body = 'Savage Separates',
-        Hands = 'Savage Gauntlets',
+        Body = 'Choral Jstcorps',
+        Hands = 'Choral Cuffs',
         Ring1 = 'Hope Ring',
         Ring2 = 'Hope Ring',
-        Back = 'Lizard Mantle +1',
-        Waist = 'Warrior\'s Belt +1',
-        Legs = 'Savage Loincloth',
+        Waist = 'Corsette',
+        Legs = 'Choral Cannions',
         Feet = 'Savage Gaiters',
     },
 
-    Cure = {--I cap is 50, II cap is 30
-        Ammo = 'Pemphredo Tathlum',
-        Neck = 'Nodens Gorget',--I 5
-        Ear1 = 'Mendi. Earring',--I 5
-        Ear2 = 'Regal Earring',
-        Hands = 'Nyame Gauntlets',
-        Ring1 = 'Stikini Ring +1',
-        Ring2 = { Name = 'Metamor. Ring +1', AugPath='A' },
-        Back = 'Aurist\'s Cape +1',
-        Waist = 'Rumination Sash',
-        Feet = 'Vanya Clogs',--I 10
+    Cure = {
+        main = gcinclude.staves["Light"],
     },
-    Self_Cure = {--cap 30
+    Self_Cure = {
         Waist = 'Gishdubar Sash',
     },
     Regen = {
@@ -189,7 +174,6 @@ local sets = {
     Wind = {
         Main = { Name = 'Kali', AugPath='C' },
         Sub = 'Ammurapi Shield',
-        Range = 'Flute +2',
         Head = 'Brioso Roundlet +2',
         Neck = 'Mnbw. Whistle +1',
         Ear1 = 'Crep. Earring',
@@ -263,6 +247,9 @@ local sets = {
     },
 	Minne = {
         Range = 'Maple Harp +1',
+    },
+    Elegy = {
+        Range = 'Horn +1',
     },
 	Minuet = {
         Range = 'Cornette +1',
@@ -465,6 +452,8 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.March);
         elseif (string.contains(spell.Name, 'Madrigal')) then
             gFunc.Equip("range", "Traversiere +1")
+        elseif (string.contains(spell.Name, 'Elegy')) then
+            gFunc.EquipSet(sets.Elegy);
 		elseif (string.contains(spell.Name, 'Minne')) then
             gFunc.EquipSet(sets.Minne);
 		elseif (string.contains(spell.Name, 'Minuet')) then

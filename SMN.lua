@@ -95,6 +95,7 @@ profile.Sets = {
 		Hands = "Austere Cuffs",
 		Body = "Austere Robe",
 		Legs = "Summoner's Spats",
+		Feet = "Summoner's Pgch.",
 	},
 	['sync40'] = {
         Main = 'Kukulcan\'s Staff',
@@ -123,6 +124,21 @@ profile.Sets = {
 	Dt = {
     },
 	pet_Dt = {
+    },
+    ['sync60'] = {
+        Main = 'Dark Staff',
+        Head = 'Evoker\'s Horn',
+        Neck = 'Checkered Scarf',
+        Ear1 = 'Onyx Earring',
+        Ear2 = 'Onyx Earring',
+        Body = 'Savage Separates',
+        Hands = 'Evoker\'s Bracers',
+        Ring1 = 'Astral Ring',
+        Ring2 = 'Tamas Ring',
+        Back = 'Cape +1',
+        Waist = 'Friar\'s Rope',
+        Legs = 'Savage Loincloth',
+        Feet = 'Savage Gaiters',
     },
 }
 

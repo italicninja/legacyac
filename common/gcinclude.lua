@@ -67,6 +67,17 @@ gcinclude.settings = {
 	Tele_Ring = 'Tavnazian Ring'; -- put your tele ring in here
 };
 
+gcinclude.staves = {
+    ['Fire'] = 'Vulkan\'s Staff',
+    ['Earth'] = 'Earth Staff',
+    ['Water'] = 'Water Staff',
+    ['Wind'] = 'Wind Staff',
+    ['Ice'] = 'Ice Staff',
+    ['Thunder'] = 'Thunder Staff',
+    ['Light'] = 'Apollo\'s Staff',
+    ['Dark'] = 'Dark Staff'
+};
+
 --[[
 Everything else in this file should not be editted by anyone trying to use my profiles. You really just want to update the various gear sets
 in each individual job lua file. Unless you know what you're doing then it is best to leave everything below this line alone, the rest here are various functions and arrays etc.
@@ -619,11 +630,11 @@ local songs = {
     -- { type = "", id =401, name = 'Hunter\'s Prelude'},
     { type = "Madrigal", id =400, name = 'Blade Madrigal', level = 51},
     { type = "Madrigal", id =399, name = 'Sword Madrigal', level = 11},
-    -- { type = "", id =398, name = 'Valor Minuet V'},
-    -- { type = "", id =397, name = 'Valor Minuet IV'},
-    -- { type = "", id =396, name = 'Valor Minuet III'},
-    -- { type = "", id =395, name = 'Valor Minuet II'},
-    -- { type = "", id =394, name = 'Valor Minuet'},
+    { type = "Minuet", id =398, name = 'Valor Minuet V', level = 87},
+    { type = "Minuet", id =397, name = 'Valor Minuet IV', level = 63},
+    { type = "Minuet", id =396, name = 'Valor Minuet III', level = 43},
+    { type = "Minuet", id =395, name = 'Valor Minuet II', level = 23},
+    { type = "Minuet", id =394, name = 'Valor Minuet', level = 3},
     -- { type = "", id =393, name = 'Knight\'s Minne V'},
     -- { type = "", id =392, name = 'Knight\'s Minne IV'},
     -- { type = "", id =391, name = 'Knight\'s Minne III'},
@@ -651,14 +662,18 @@ local songs = {
 }
 
 
-
+-- This expects you to know the spells...
 -- Function to cast the appropriate song
 function gcinclude.castSong(songType)
 	local player = AshitaCore:GetMemoryManager():GetPlayer()
 	--print(chat.header('GCinclude'):append(chat.message("My Level " .. player:GetMainJobLevel())));
     for _, song in ipairs(songs) do
         if song.type == songType then
-            local macroCommand = '/ma "' .. song.name .. '" <me>'
+			local songTarget = '<me>'
+			if song.type == "Requiem" then
+				songTarget = '<t>'
+			end
+            local macroCommand = '/ma "' .. song.name .. '" '.. songTarget
             local recast = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(song.id);
 			--print(chat.header('GCinclude'):append(chat.message("Song ID: " .. song.id .. " Song Name: " .. song.name .. " Recast: " .. recast)));
 

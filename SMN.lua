@@ -32,7 +32,7 @@ profile.Sets = {
 	Idle = {
 		main = staff["Fire"],
 		Ammo = "Hedgehog Bomb",
-		Head = "Evoker's Horn",
+		Head = "Summoner\'s Horn",
 		Neck = "Smn. Torque",
 		Ear1 = "Beastly earring",
 		Ear2 = "Death Earring",
@@ -91,7 +91,7 @@ profile.Sets = {
 		Feet = "Shep. Boots",
 	},
 	BPDelay = {
-		Head = "Austere Hat",
+		Head = "Summoner\'s Horn",
 		Hands = "Austere Cuffs",
 		Body = "Austere Robe",
 		Legs = "Summoner's Spats",
@@ -272,7 +272,7 @@ profile.HandleDefault = function()
 		gFunc.EquipSet(profile.Sets.Idle)
 	else
 		gFunc.EquipSet(profile.Sets.perp)
-		gFunc.Equip("main", staff[petElement])
+		gFunc.Equip("main", gcinclude.staves[petElement])
 		local env = gData.GetEnvironment()
 		if pet.Name == "Carbuncle" then
 			gFunc.Equip("hands", "Carbuncle Mitts")
@@ -321,9 +321,8 @@ profile.HandleMidcast = function()
 		gFunc.EquipSet(profile.Sets.Nuke)
 	elseif action.Skill == "Summoning" then
 		petElement = action.Element
-	end
-	if action.ActionType == "Spell" then
-		--gFunc.Equip('main', ElementalStaff[action.Element]);
+	elseif action.ActionType == "Spell" then
+		gFunc.Equip('main', gcinclude.staves[action.Element]);
 	end
 end
 

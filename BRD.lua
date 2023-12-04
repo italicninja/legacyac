@@ -5,13 +5,16 @@ local sets = {
     ['idle'] = {
         Main = 'Paper Knife',
         Sub = 'Minstrel\'s Dagger',
-        Range = 'Royal Spearman\'s Horn',
+        Range = 'Ryl.Spr. Horn',
         Head = 'Choral Roundlet',
         Neck = 'Bird Whistle',
+        Ear1 = 'Melody Earring',
+        Ear2 = 'Melody Earring',
         Body = 'Choral Jstcorps',
         Hands = 'Choral Cuffs',
         Ring1 = 'Hope Ring',
         Ring2 = 'Hope Ring',
+        Back = 'Lizard Mantle +1',
         Waist = 'Corsette',
         Legs = 'Choral Cannions',
         Feet = 'Savage Gaiters',
@@ -100,13 +103,13 @@ local sets = {
     ['Song_Precast'] = {
         Main = 'Paper Knife',
         Sub = 'Minstrel\'s Dagger',
-        Range = 'Royal Spearman\'s Horn',
+        Range = 'Horn +1',
         Head = 'Choral Roundlet',
         Neck = 'Bird Whistle',
         Body = 'Choral Jstcorps',
         Hands = 'Choral Cuffs',
         Ring1 = 'Hope Ring',
-        Ring2 = 'Hope Ring',
+        Ring2 = 'Minstrel\'s Ring',
         Waist = 'Corsette',
         Legs = 'Choral Cannions',
         Feet = 'Savage Gaiters',
@@ -255,7 +258,7 @@ local sets = {
         Range = 'Cornette +1',
     },
     March = {
-        Range = 'Ryl.Spr. Horn',
+        Range = 'Faerie Piccolo',
     },
     Madrigal = {
         Head = 'Fili Calot +1',
@@ -331,7 +334,7 @@ profile.OnLoad = function()
 
     AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
     AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-    --AshitaCore:GetChatManager():QueueCommand(1, '/lockstyle on');
+    AshitaCore:GetChatManager():QueueCommand(1, '/anon');
 end
 
 profile.OnUnload = function()

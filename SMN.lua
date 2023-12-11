@@ -39,7 +39,7 @@ profile.Sets = {
 		Ring1 = "Evoker's Ring",
 		Ring2 = "Tamas Ring",
 		Body = "Summoner's Dblt.",
-		Hands = "Evoker's Bracers",
+		Hands = "Summoner\'s Brcr.",
 		Back = "Summoner's Cape",
 		Waist = "Hierarch Belt",
 		Legs = "Summoner's Spats",
@@ -81,7 +81,7 @@ profile.Sets = {
 	SummonSkill = {
 		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
-		Hands = "Austere Cuffs",
+		Hands = "Summoner\'s Brcr.",
 		Ring1 = "Evoker's Ring",
 	},
 	petMacc = {
@@ -92,7 +92,7 @@ profile.Sets = {
 	},
 	BPDelay = {
 		Head = "Summoner\'s Horn",
-		Hands = "Austere Cuffs",
+		Hands = "Summoner\'s Brcr.",
 		Body = "Austere Robe",
 		Legs = "Summoner's Spats",
 		Feet = "Summoner's Pgch.",

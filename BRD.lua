@@ -8,13 +8,13 @@ local sets = {
         Range = 'Ryl.Spr. Horn',
         Head = 'Choral Roundlet',
         Neck = 'Bird Whistle',
-        Ear1 = 'Melody Earring',
-        Ear2 = 'Melody Earring',
+        Ear1 = 'Melody earring',
+        Ear2 = 'Melody earring',
         Body = 'Choral Jstcorps',
         Hands = 'Choral Cuffs',
         Ring1 = 'Hope Ring',
         Ring2 = 'Hope Ring',
-        Back = 'Lizard Mantle +1',
+        Back = "Jester\'s Cape +1",
         Waist = 'Corsette',
         Legs = 'Choral Cannions',
         Feet = 'Savage Gaiters',
@@ -51,7 +51,7 @@ local sets = {
     },
 
     ['Tp_Default'] = {
-        Head = 'Dodge Headband',
+        Head = 'Choral Roundlet',
         Neck = 'Peacock Amulet',
         Ear1 = 'Beetle Earring +1',
         Ear2 = 'Beetle Earring +1',
@@ -59,10 +59,10 @@ local sets = {
         Hands = 'Savage Gauntlets',
         Ring1 = 'Courage Ring',
         Ring2 = 'Courage Ring',
-        Back = 'Lizard Mantle +1',
+        Back = 'Bard\'s Cape',
         Waist = 'Warrior\'s Belt +1',
-        Legs = 'Savage Loincloth',
-        Feet = 'Savage Gaiters',
+        Legs = 'Choral Cannions',
+        Feet = 'Choral Slippers',
     },
 
     Tp_Hybrid = {
@@ -84,7 +84,6 @@ local sets = {
         Hands = 'Leyline Gloves', --6
         Ring1 = 'Prolix Ring', --2
         Ring2 = 'Kishar Ring', --5
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
         Waist = 'Embla Sash', --5
         Legs = 'Aya. Cosciales +2', --6
         Feet = 'Volte Gaiters', --6
@@ -106,11 +105,14 @@ local sets = {
         Range = 'Horn +1',
         Head = 'Choral Roundlet',
         Neck = 'Bird Whistle',
+        Ear1 = 'Melody earring',
+        Ear2 = 'Melody earring',
         Body = 'Choral Jstcorps',
         Hands = 'Choral Cuffs',
         Ring1 = 'Hope Ring',
         Ring2 = 'Minstrel\'s Ring',
         Waist = 'Corsette',
+        Back = "Jester\'s Cape +1",
         Legs = 'Choral Cannions',
         Feet = 'Savage Gaiters',
     },

@@ -26,20 +26,33 @@ local petMacroPage = {
 	["Fenrir"] = 9,
 	["Diabolos"] = 10,
 }
+-- Phase, Acc, Eva
+-- local fenrirChart = {
+-- 	"New Moon" = [1, 31],
+-- 	"Waxing Crescent" 	Acc-6 	Eva-26
+-- 	Waxing Crescent 	Acc-11 	Eva-21
+-- 	First Quarter Moon 	Acc-16 	Eva-16
+-- 	Waxing Gibbous 	Acc-21 	Eva-11
+-- 	Waxing Gibbous 	Acc-26 	Eva-6
+-- 	Full Moon Acc-31 	Eva-1
+-- 	Waning Gibbous 	Acc-26 	Eva-6
+-- 	Waning Gibbous 	Acc-21 	Eva-11
+-- 	Last Quarter Moon 	Acc-16 	Eva-16
+-- 	Waning Crescent 	Acc-11 	Eva-21
+-- 	Waning Crescent 	Acc-6 	Eva-26
 
+-- }
 local profile = {}
 profile.Sets = {
 	Idle = {
 		main = staff["Fire"],
 		Ammo = "Hedgehog Bomb",
 		Head = "Summoner\'s Horn",
-		Neck = "Smn. Torque",
 		Ear1 = "Beastly earring",
-		Ear2 = "Death Earring",
 		Ring1 = "Evoker's Ring",
 		Ring2 = "Tamas Ring",
 		Body = "Summoner's Dblt.",
-		Hands = "Summoner\'s Brcr.",
+		Hands = "Smn. Bracers +1",
 		Back = "Summoner's Cape",
 		Waist = "Hierarch Belt",
 		Legs = "Summoner's Spats",
@@ -62,7 +75,9 @@ profile.Sets = {
 		main = staff["Light"],
 	},
 	Stoneskin = {},
-	FastCast = {},
+	FastCast = {
+		Ear2 = "Loquac. Earring",
+	},
 	petMAB = {
 		Head = "Shep. Bonnet",
 		Neck = "Smn. Torque",
@@ -81,7 +96,7 @@ profile.Sets = {
 	SummonSkill = {
 		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
-		Hands = "Summoner\'s Brcr.",
+		Hands = "Smn. Bracers +1",
 		Ring1 = "Evoker's Ring",
 	},
 	petMacc = {
@@ -92,7 +107,7 @@ profile.Sets = {
 	},
 	BPDelay = {
 		Head = "Summoner\'s Horn",
-		Hands = "Summoner\'s Brcr.",
+		Hands = "Smn. Bracers +1",
 		Body = "Austere Robe",
 		Legs = "Summoner's Spats",
 		Feet = "Summoner's Pgch.",
@@ -113,7 +128,7 @@ profile.Sets = {
         Feet = 'Savage Gaiters',
     },
 	Town = {
-
+		Body = 'Kingdom Aketon',
     },
 	Idle_Regen = {
         Neck = 'Bathy Choker +1',
@@ -122,6 +137,11 @@ profile.Sets = {
         Feet = 'Volte Gaiters',
     },
 	Dt = {
+    },
+	day = {
+        Neck = 'Fenrir\'s Torque',
+    },
+	night = {
     },
 	pet_Dt = {
     },
@@ -259,6 +279,7 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
+	local game = gData.GetEnvironment();
 	local petAction = gData.GetPetAction()
 	if petAction ~= nil then
 		HandlePetAction(petAction)
@@ -283,6 +304,11 @@ profile.HandleDefault = function()
 		if env.WeatherElement == petElement then
 			gFunc.Equip("head", "Summoner's Horn")
 		end
+	end
+	if (game.Time > 6.00) or (game.Time < 18.00) then
+		gFunc.EquipSet(profile.Sets.day);
+	else
+		gFunc.EquipSet(profile.Sets.night);
 	end
 	gcinclude.CheckDefault ();
     if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(sets.Dt) end;

@@ -870,7 +870,7 @@ function gcinclude.DoMoonshade()
 	if player.TP < gcinclude.settings.MoonshadeTP then gFunc.Equip('Ear2', 'Moonshade Earring') end
 end
 
-function gcinclude.CheckCancels()--tossed Stoneskin in here too
+function gcinclude.CheckCancels()
 	local action = gData.GetAction();
 	local sneak = gData.GetBuffCount('Sneak');
 	local stoneskin = gData.GetBuffCount('Stoneskin');
@@ -881,7 +881,12 @@ function gcinclude.CheckCancels()--tossed Stoneskin in here too
 		AshitaCore:GetChatManager():QueueCommand(1, '/ja "Spectral Jig" <me>');
 	end
 	local function do_sneak()
+		gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
 		AshitaCore:GetChatManager():QueueCommand(1, '/ma "Sneak" <me>');
+	end
+	local function do_invis()
+		gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
+		AshitaCore:GetChatManager():QueueCommand(1, '/ma "Invisible" <me>');
 	end
 	local function do_ss()
 		AshitaCore:GetChatManager():QueueCommand(1, '/ma "Stoneskin" <me>');
@@ -895,6 +900,12 @@ function gcinclude.CheckCancels()--tossed Stoneskin in here too
 		gFunc.CancelAction();
 		AshitaCore:GetChatManager():QueueCommand(1, '/cancel Sneak');
 		do_sneak:once(1);
+	elseif (action.Name == 'Invisible') then
+		gFunc.CancelAction();
+		do_sneak:once(1);
+	elseif (action.Name == 'Sneak') then
+		gFunc.CancelAction();
+		do_invis:once(1);
 	elseif (action.Name == 'Stoneskin' and stoneskin ~= 0) then
 		gFunc.CancelAction();
 		AshitaCore:GetChatManager():QueueCommand(1, '/cancel Stoneskin');

@@ -79,19 +79,17 @@ profile.Sets = {
 		Ear2 = "Loquac. Earring",
 	},
 	petMAB = {
-		Head = "Shep. Bonnet",
+		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
 		Body = "Shep. Tunic",
-		Hands = "Austere Cuffs",
-		Feet = "Shep. Boots",
+		Hands = "Smn. Bracers +1",
 		Ring1 = "Evoker's Ring",
-		Ring2 = "Tamas Ring",
 	},
 	petAtk = {
-		Head = "Shep. Bonnet",
+		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
-		Hands = "Austere Cuffs",
-		Feet = "Shep. Boots",
+		Hands = "Smn. Bracers +1",
+		Ring1 = "Evoker's Ring",
 	},
 	SummonSkill = {
 		Head = "Evoker's Horn",
@@ -102,8 +100,8 @@ profile.Sets = {
 	petMacc = {
 		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
-		Hands = "Austere Cuffs",
-		Feet = "Shep. Boots",
+		Hands = "Smn. Bracers +1",
+		Ring1 = "Evoker's Ring",
 	},
 	BPDelay = {
 		Head = "Summoner\'s Horn",
@@ -246,8 +244,9 @@ local DebuffBP = T({
 local petElement = "Light"
 
 local function HandlePetAction(PetAction)
-	--There is an extra character somewhere coming through in PetAction.Name
-	local BPName = string.sub(PetAction.Name, 1, string.len(PetAction.Name) - 1)
+	local BPName = PetAction.Name
+	-- local BPName = string.sub(PetAction.Name, 1, string.len(PetAction.Name) - 1)
+	-- print(chat.header('HandlePetAction'):append(chat.message(BPName)));
 	if MagicBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.petMAB)
 	elseif PhysBP:contains(BPName) then
@@ -337,10 +336,6 @@ profile.HandleMidcast = function()
 	local action = gData.GetAction()
 	if action.Name:contains("Cur") then
 		gFunc.EquipSet(profile.Sets.Cure)
-	elseif action.Name:contains("Sneak") then
-		gFunc.Equip("feet", "Dream Boots +1")
-	elseif action.Name:contains("Invisible") then
-		gFunc.Equip("hands", "Dream Mittens +1")
 	elseif action.Name == "Stoneskin" then
 		gFunc.EquipSet(profile.Sets.Stoneskin)
 	elseif action.Skill == "Elemental Magic" then
@@ -350,6 +345,7 @@ profile.HandleMidcast = function()
 	elseif action.ActionType == "Spell" then
 		gFunc.Equip('main', gcinclude.staves[action.Element]);
 	end
+	gcinclude.CheckCancels()
 end
 
 profile.HandlePreshot = function() end

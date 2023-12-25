@@ -51,7 +51,7 @@ profile.Sets = {
 		Ear1 = "Beastly earring",
 		Ring1 = "Evoker's Ring",
 		Ring2 = "Tamas Ring",
-		Body = "Summoner's Dblt.",
+		Body = "Yinyang Robe",
 		Hands = "Smn. Bracers +1",
 		Back = "Summoner's Cape",
 		Waist = "Hierarch Belt",
@@ -106,7 +106,7 @@ profile.Sets = {
 	BPDelay = {
 		Head = "Summoner\'s Horn",
 		Hands = "Smn. Bracers +1",
-		Body = "Austere Robe",
+		Body = "Yinyang Robe",
 		Legs = "Summoner's Spats",
 		Feet = "Summoner's Pgch.",
 	},
@@ -132,7 +132,7 @@ profile.Sets = {
         Neck = 'Bathy Choker +1',
     },
     Idle_Refresh = {
-        Feet = 'Volte Gaiters',
+	--	Body = "Yinyang Robe",
     },
 	Dt = {
     },
@@ -298,7 +298,7 @@ profile.HandleDefault = function()
 			gFunc.Equip("hands", "Carbuncle Mitts")
 		end
 		if env.DayElement == petElement then
-			gFunc.Equip("body", "Summoner's Doublet")
+			gFunc.Equip("body", "Summoner's Dblt.")
 		end
 		if env.WeatherElement == petElement then
 			gFunc.Equip("head", "Summoner's Horn")
@@ -345,7 +345,7 @@ profile.HandleMidcast = function()
 	elseif action.ActionType == "Spell" then
 		gFunc.Equip('main', gcinclude.staves[action.Element]);
 	end
-	gcinclude.CheckCancels()
+	--gcinclude.CheckCancels()
 end
 
 profile.HandlePreshot = function() end

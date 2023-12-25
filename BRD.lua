@@ -114,7 +114,7 @@ local sets = {
         Waist = 'Corsette',
         Back = "Jester\'s Cape +1",
         Legs = 'Choral Cannions',
-        Feet = 'Savage Gaiters',
+        Feet = 'Bard\'s Slippers',
     },
 
     Cure = {
@@ -398,7 +398,7 @@ profile.HandlePrecast = function()
         gFunc.EquipSet(sets.Song_Precast);
     end
 
-    gcinclude.CheckCancels();
+    --gcinclude.CheckCancels();
 end
 
 profile.HandleMidcast = function()

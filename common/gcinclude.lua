@@ -185,7 +185,7 @@ function gcinclude.HandleCommands(args)
 	local player = gData.GetPlayer();
 	local toggle = nil;
 	local status = nil;
-	
+
 	if args[1] == 'gcmessages' then
 		if gcinclude.settings.Messages then
 			gcinclude.settings.Messages = false;
@@ -195,7 +195,7 @@ function gcinclude.HandleCommands(args)
 			print(chat.header('GCinclude'):append(chat.message('Chat messages are enabled')));
 		end
 	elseif (args[1] == 'wsdistance') then
-		if (tonumber(args[2])) then 
+		if (tonumber(args[2])) then
 			gcinclude.settings.WScheck = true;
 			gcinclude.settings.WSdistance = tonumber(args[2]);
 			print(chat.header('GCinclude'):append(chat.message('WS Distance is on and set to ' .. gcinclude.settings.WSdistance)));
@@ -460,7 +460,7 @@ function gcinclude.CheckWsBailout()
 	elseif (player.TP <= 999) or (sleep+petrify+stun+terror+amnesia+charm >= 1) then
 		return false;
 	end
-		
+
 	return true;
 end
 
@@ -489,18 +489,18 @@ function gcinclude.DoWarpRing()
 		AshitaCore:GetChatManager():QueueCommand(1, '/item "Warp Ring" <me>');
 		forceidleset:once(8);
 	end
-	
+
 	usering:once(11);
 end
 
 function gcinclude.DoTeleRing()
 	AshitaCore:GetChatManager():QueueCommand(1, '/lac equip ring2 "' .. gcinclude.settings.Tele_Ring .. '"');
-	
+
 	local function usering()
 		local function forceidleset()
 			AshitaCore:GetChatManager():QueueCommand(1, '/lac set Idle');
 		end
-		AshitaCore:GetChatManager():QueueCommand(1, '/item "' .. gcinclude.settings.Tele_Ring .. '" <me>');	
+		AshitaCore:GetChatManager():QueueCommand(1, '/item "' .. gcinclude.settings.Tele_Ring .. '" <me>');
 		forceidleset:once(8);
 	end
 	usering:once(11);
@@ -693,7 +693,7 @@ function gcinclude.DoAspir()
 	local recast1 = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(247);
 	local recast2 = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(248);
 	local recast3 = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(881);
-	
+
 	if (player:GetMainJob() == 4 and player:GetJobPointsSpent(4) >= 550) or (player:GetMainJob() == 21 and player:GetJobPointsSpent(21) >= 550) then
 		if (recast3 == 0) then
 			AshitaCore:GetChatManager():QueueCommand(1, '/ma "Aspir III" <t>');
@@ -717,7 +717,7 @@ function gcinclude.DoDrain()
 	local player = AshitaCore:GetMemoryManager():GetPlayer();
 	local recast1 = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(245);
 	local recast2 = AshitaCore:GetMemoryManager():GetRecast():GetSpellTimer(246);
-	
+
 	if (player:GetMainJob() == 8) then
 		if (recast2 == 0) then
 			AshitaCore:GetChatManager():QueueCommand(1, '/ma "Drain II" <t>');
@@ -739,7 +739,7 @@ function gcinclude.DoSCHspells(spell)
 	local target = 'me';
 	local points = 100;
 
-	if (spell == 'helix') then 
+	if (spell == 'helix') then
 		type = gcinclude.HelixSpells;
 		target = '<t>';
 		points = 1200;
@@ -794,7 +794,7 @@ end
 
 function gcinclude.DoSiphon()
 	local recast = gcinclude.CheckAbilityRecast('Elemental Siphon');
-	if recast ~= 0 then 
+	if recast ~= 0 then
 		print(chat.header('GCinclude'):append(chat.warning('Elemental Siphon not available yet!')));
 		return;
 	end
@@ -803,7 +803,7 @@ function gcinclude.DoSiphon()
 	local spirit = 'none';
 	local spirits = {['Firesday'] = 'Fire Spirit', ['Earthsday'] = 'Earth Spirit', ['Watersday'] = 'Water Spirit', ['Windsday'] = 'Air Spirit', ['Iceday'] = 'Ice Spirit', ['Lightningday'] = 'Thunder Spirit', ['Lightsday'] = 'Light Spirit', ['Darksday'] = 'Dark Spirit'};
 	local e = gData.GetEnvironment();
-	
+
 	local function release()
 		AshitaCore:GetChatManager():QueueCommand(1, '/ja "Release" <me>');
 	end
@@ -870,46 +870,12 @@ function gcinclude.DoMoonshade()
 	if player.TP < gcinclude.settings.MoonshadeTP then gFunc.Equip('Ear2', 'Moonshade Earring') end
 end
 
-function gcinclude.CheckCancels()
+function gcinclude.CheckCommonBuffs()
 	local action = gData.GetAction();
-	local sneak = gData.GetBuffCount('Sneak');
-	local stoneskin = gData.GetBuffCount('Stoneskin');
-	local target = gData.GetActionTarget();
-	local me = AshitaCore:GetMemoryManager():GetParty():GetMemberName(0);
-	
-	local function do_jig()
-		AshitaCore:GetChatManager():QueueCommand(1, '/ja "Spectral Jig" <me>');
-	end
-	local function do_sneak()
+	if (action.Name == 'Sneak') then
 		gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
-		AshitaCore:GetChatManager():QueueCommand(1, '/ma "Sneak" <me>');
-	end
-	local function do_invis()
-		gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
-		AshitaCore:GetChatManager():QueueCommand(1, '/ma "Invisible" <me>');
-	end
-	local function do_ss()
-		AshitaCore:GetChatManager():QueueCommand(1, '/ma "Stoneskin" <me>');
-	end
-
-	if (action.Name == 'Spectral Jig' and sneak ~=0) then
-		gFunc.CancelAction();
-		AshitaCore:GetChatManager():QueueCommand(1, '/cancel Sneak');
-		do_jig:once(2);
-	elseif (action.Name == 'Sneak' and sneak ~= 0 and target.Name == me) then
-		gFunc.CancelAction();
-		AshitaCore:GetChatManager():QueueCommand(1, '/cancel Sneak');
-		do_sneak:once(1);
 	elseif (action.Name == 'Invisible') then
-		gFunc.CancelAction();
-		do_sneak:once(1);
-	elseif (action.Name == 'Sneak') then
-		gFunc.CancelAction();
-		do_invis:once(1);
-	elseif (action.Name == 'Stoneskin' and stoneskin ~= 0) then
-		gFunc.CancelAction();
-		AshitaCore:GetChatManager():QueueCommand(1, '/cancel Stoneskin');
-		do_ss:once(1);
+		gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
 	end
 end
 
@@ -918,6 +884,7 @@ function gcinclude.CheckDefault()
 	gcinclude.SetTownGear();
     gcinclude.CheckCommonDebuffs();
 	gcinclude.CheckLockingRings();
+	gcinclude.CheckCommonBuffs()
 	if (gcinclude.CraftSet == true) then gFunc.EquipSet(gcinclude.sets.Crafting) end
 	if (gcinclude.ZeniSet == true) then gFunc.EquipSet(gcinclude.sets.Zeni) end
 	if (gcinclude.FishSet == true) then gFunc.EquipSet(gcinclude.sets.Fishing) end

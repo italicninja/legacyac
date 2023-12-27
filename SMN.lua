@@ -309,9 +309,7 @@ profile.HandleDefault = function()
 	else
 		gFunc.EquipSet(profile.Sets.night);
 	end
-	gcinclude.CheckDefault ();
-    if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(sets.Dt) end;
-    if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(sets.Movement) end;
+	gcinclude.CheckDefault();
 end
 
 profile.HandleAbility = function()
@@ -345,7 +343,7 @@ profile.HandleMidcast = function()
 	elseif action.ActionType == "Spell" then
 		gFunc.Equip('main', gcinclude.staves[action.Element]);
 	end
-	--gcinclude.CheckCancels()
+	-- gcinclude.CheckCancels()
 end
 
 profile.HandlePreshot = function() end

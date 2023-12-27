@@ -373,7 +373,7 @@ profile.HandleAbility = function()
 
     if string.match(ability.Name, 'Troubadour') or string.match(ability.Name, 'Nightingale') or string.match(ability.Name, 'Soul Voice') then gFunc.EquipSet(sets.Nitro) end
 
-    gcinclude.CheckCancels();
+    --gcinclude.CheckCancels();
 end
 
 profile.HandleItem = function()

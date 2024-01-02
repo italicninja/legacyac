@@ -627,8 +627,8 @@ local songs = {
     -- { type = "", id =405, name = 'Fowl Aubade'},
     -- { type = "", id =404, name = 'Dragonfoe Mambo'},
     -- { type = "", id =403, name = 'Sheepfoe Mambo'},
-    -- { type = "", id =402, name = 'Archer\'s Prelude'},
-    -- { type = "", id =401, name = 'Hunter\'s Prelude'},
+    { type = "Prelude", id =402, name = 'Archer\'s Prelude', level = 51},
+    { type = "Prelude", id =401, name = 'Hunter\'s Prelude', level = 31},
     { type = "Madrigal", id =400, name = 'Blade Madrigal', level = 51},
     { type = "Madrigal", id =399, name = 'Sword Madrigal', level = 11},
     { type = "Minuet", id =398, name = 'Valor Minuet V', level = 87},
@@ -874,8 +874,10 @@ function gcinclude.CheckCommonBuffs()
 	local action = gData.GetAction();
 	if (action.Name == 'Sneak') then
 		gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
+		gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
 	elseif (action.Name == 'Invisible') then
 		gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
+		gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
 	end
 end
 
@@ -884,7 +886,6 @@ function gcinclude.CheckDefault()
 	gcinclude.SetTownGear();
     gcinclude.CheckCommonDebuffs();
 	gcinclude.CheckLockingRings();
-	gcinclude.CheckCommonBuffs()
 	if (gcinclude.CraftSet == true) then gFunc.EquipSet(gcinclude.sets.Crafting) end
 	if (gcinclude.ZeniSet == true) then gFunc.EquipSet(gcinclude.sets.Zeni) end
 	if (gcinclude.FishSet == true) then gFunc.EquipSet(gcinclude.sets.Fishing) end

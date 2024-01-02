@@ -342,8 +342,13 @@ profile.HandleMidcast = function()
 		petElement = action.Element
 	elseif action.ActionType == "Spell" then
 		gFunc.Equip('main', gcinclude.staves[action.Element]);
+	elseif (action.Name == 'Sneak') then
+		gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
+		gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
+	elseif (action.Name == 'Invisible') then
+		gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
+		gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
 	end
-	-- gcinclude.CheckCancels()
 end
 
 profile.HandlePreshot = function() end

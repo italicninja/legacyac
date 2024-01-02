@@ -419,6 +419,8 @@ profile.HandleMidcast = function()
         elseif string.contains(spell.Name, 'Regen') then
             gFunc.EquipSet(sets.Regen);
         end
+
+	    gcinclude.CheckCommonBuffs()
     elseif (spell.Skill == 'Healing Magic') then
         gFunc.EquipSet(sets.Cure);
         if (target.Name == me) then
@@ -475,7 +477,6 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Harp);
         end
     end
-	if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
 end
 
 profile.HandlePreshot = function()

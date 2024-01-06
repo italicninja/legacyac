@@ -16,7 +16,7 @@ local sets = {
         Ring2 = 'Hope Ring',
         Back = "Jester\'s Cape +1",
         Waist = 'Corsette',
-        Legs = 'Choral Cannions',
+        Legs = 'Bard\'s Cannions',
         Feet = 'Savage Gaiters',
     },
     Resting = {},
@@ -85,7 +85,7 @@ local sets = {
         Ring1 = 'Prolix Ring', --2
         Ring2 = 'Kishar Ring', --5
         Waist = 'Embla Sash', --5
-        Legs = 'Aya. Cosciales +2', --6
+        Legs = 'Bard\'s Cannions',
         Feet = 'Volte Gaiters', --6
     },
     Cure_Precast = {
@@ -103,7 +103,7 @@ local sets = {
         Main = 'Paper Knife',
         Sub = 'Minstrel\'s Dagger',
         Range = 'Horn +1',
-        Head = 'Choral Roundlet',
+        Head = 'Bard\'s Roundlet',
         Neck = 'Bird Whistle',
         Ear1 = 'Melody earring',
         Ear2 = 'Melody earring',
@@ -172,7 +172,7 @@ local sets = {
         Ring2 = { Name = 'Metamor. Ring +1', AugPath='A' },
         Back = { Name = 'Aurist\'s Cape +1', AugPath='A' },
         Waist = { Name = 'Acuity Belt +1', AugPath='A' },
-        Legs = 'Brioso Cannions +2',
+        Legs = 'Bard\'s Cannions',
         Feet = 'Brioso Slippers +3',
     },
 
@@ -244,7 +244,7 @@ local sets = {
         Ring2 = { Name = 'Gelatinous Ring +1', AugPath='A' },
         Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
         Waist = 'Flume Belt +1',
-        Legs = 'Inyanga Shalwar +2',
+        Legs = 'Bard\'s Cannions',
         Feet = 'Brioso Slippers +3',
     },
     Paeon = {

@@ -96,6 +96,7 @@ profile.Sets = {
 		Neck = "Smn. Torque",
 		Hands = "Smn. Bracers +1",
 		Ring1 = "Evoker's Ring",
+		Feet = "Nashira Crackows",
 	},
 	petMacc = {
 		Head = "Evoker's Horn",
@@ -132,7 +133,7 @@ profile.Sets = {
         Neck = 'Bathy Choker +1',
     },
     Idle_Refresh = {
-	--	Body = "Yinyang Robe",
+		Body = "Yinyang Robe",
     },
 	Dt = {
     },
@@ -299,6 +300,9 @@ profile.HandleDefault = function()
 		end
 		if env.DayElement == petElement then
 			gFunc.Equip("body", "Summoner's Dblt.")
+			if pet.Name == "Carbuncle" then
+				gFunc.Equip("body", "Yinyang Robe")
+			end
 		end
 		if env.WeatherElement == petElement then
 			gFunc.Equip("head", "Summoner's Horn")
@@ -341,13 +345,14 @@ profile.HandleMidcast = function()
 	elseif action.Skill == "Summoning" then
 		petElement = action.Element
 	elseif action.ActionType == "Spell" then
+		if (action.Name == 'Sneak') then
+			gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
+			gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
+		elseif (action.Name == 'Invisible') then
+			gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
+			gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
+		end
 		gFunc.Equip('main', gcinclude.staves[action.Element]);
-	elseif (action.Name == 'Sneak') then
-		gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
-		gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
-	elseif (action.Name == 'Invisible') then
-		gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
-		gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
 	end
 end
 

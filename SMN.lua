@@ -56,7 +56,7 @@ profile.Sets = {
 		Back = "Summoner's Cape",
 		Waist = "Hierarch Belt",
 		Legs = "Summoner's Spats",
-		Feet = "Summoner's Pgch.",
+		Feet = "Nashira Crackows",
 	},
 	perp = {
 		Body = "Austere Robe",
@@ -127,7 +127,7 @@ profile.Sets = {
         Feet = 'Savage Gaiters',
     },
 	Town = {
-		Body = 'Kingdom Aketon',
+		Body = 'Ducal Aketon',
     },
 	Idle_Regen = {
         Neck = 'Bathy Choker +1',

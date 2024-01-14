@@ -3,10 +3,8 @@ gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
 local sets = {
     ['idle'] = {
-        Main = 'Paper Knife',
-        Sub = 'Minstrel\'s Dagger',
         Range = 'Ryl.Spr. Horn',
-        Head = 'Choral Roundlet',
+        Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
         Ear1 = 'Melody earring',
         Ear2 = 'Melody earring',
@@ -19,7 +17,13 @@ local sets = {
         Legs = 'Bard\'s Cannions',
         Feet = 'Savage Gaiters',
     },
-    Resting = {},
+    Resting = {
+        Main = "Dark Staff",
+        Neck = "Checkered Scarf",
+        Body = "Errant Hpl.",
+        Legs = "Baron's Slops",
+        Feet = "Shep. Boots",
+    },
     Idle_Regen = {
         Neck = 'Bathy Choker +1',
         Ear1 = 'Infused Earring',
@@ -30,8 +34,8 @@ local sets = {
         Legs = 'Assid. Pants +1',
         Feet = 'Volte Gaiters',
     },
-    Town = {
-
+	Town = {
+		Body = 'Ducal Aketon',
     },
 
     Dt = {
@@ -49,13 +53,23 @@ local sets = {
         Legs = 'Nyame Flanchard',
         Feet = 'Nyame Sollerets',
     },
-
+    ['hp_drop'] = {
+        Body = 'Bard\'s Jstcorps',
+        Hands = 'Errant Cuffs',
+        Ring1 = 'Astral Ring',
+        Ring2 = 'Astral Ring',
+		Neck = "Checkered Scarf",
+        Back = 'Blue Cape',
+        Waist = 'Scouter\'s Rope',
+        Legs = 'Choral Cannions',
+        Feet = 'Errant Pigaches',
+    },
     ['Tp_Default'] = {
         Head = 'Choral Roundlet',
         Neck = 'Peacock Amulet',
         Ear1 = 'Beetle Earring +1',
         Ear2 = 'Beetle Earring +1',
-        Body = 'Savage Separates',
+        Body = 'Bard\'s Jstcorps',
         Hands = 'Savage Gauntlets',
         Ring1 = 'Courage Ring',
         Ring2 = 'Courage Ring',
@@ -76,7 +90,6 @@ local sets = {
         Main = { Name = 'Kali', AugPath='C' }, --7
         Sub = 'Genmei Shield',
         Range = { Name = 'Gjallarhorn', AugTrial=3591 },
-        Head = 'Haruspex Hat', --8
         Neck = 'Bird Whistle',
         Ear1 = 'Eabani Earring',
         Ear2 = 'Etiolation Earring', --1
@@ -99,26 +112,29 @@ local sets = {
         Head = 'Umuthi Hat',
         Waist = 'Siegel Sash',
     },
+    hmp = {
+		Main = "Dark Staff",
+		Neck = "Checkered Scarf",
+		Body = "Errant Hpl.",
+		Legs = "Baron's Slops",
+		Feet = "Shep. Boots",
+	},
     ['Song_Precast'] = {
         Main = 'Paper Knife',
         Sub = 'Minstrel\'s Dagger',
         Range = 'Horn +1',
-        Head = 'Bard\'s Roundlet',
+        Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
-        Ear1 = 'Melody earring',
+		Ear1 = "Beastly earring",
         Ear2 = 'Melody earring',
         Body = 'Choral Jstcorps',
-        Hands = 'Choral Cuffs',
+        Hands = 'Bard\'s Cuffs',
         Ring1 = 'Hope Ring',
         Ring2 = 'Minstrel\'s Ring',
         Waist = 'Corsette',
         Back = "Jester\'s Cape +1",
         Legs = 'Choral Cannions',
         Feet = 'Bard\'s Slippers',
-    },
-
-    Cure = {
-        main = gcinclude.staves["Light"],
     },
     Self_Cure = {
         Waist = 'Gishdubar Sash',
@@ -155,7 +171,10 @@ local sets = {
         Neck = 'Nodens Gorget',
         Waist = 'Siegel Sash',
     },
-    Phalanx = {},
+    Cure = {
+        main = gcinclude.staves["Light"],
+		Body = "Errant Hpl.",
+    },
     Refresh = {
 		Waist = 'Gishdubar Sash',
     },
@@ -351,6 +370,11 @@ profile.HandleDefault = function()
     gFunc.EquipSet(sets.Idle);
 
 	local player = gData.GetPlayer();
+
+    if (player.HPP >= 75) then
+        gFunc.EquipSet(sets['hp_drop'])
+    end
+
     if (player.Status == 'Engaged') then
         gFunc.EquipSet(sets.Tp_Default)
         if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
@@ -410,8 +434,8 @@ profile.HandleMidcast = function()
     if (spell.Skill == 'Enhancing Magic') then
         gFunc.EquipSet(sets.Enhancing);
 
-        if string.match(spell.Name, 'Phalanx') then
-            gFunc.EquipSet(sets.Phalanx);
+        if string.contains(spell.Name, 'Cure') then
+            gFunc.EquipSet(sets.Cure);
         elseif string.match(spell.Name, 'Stoneskin') then
             gFunc.EquipSet(sets.Stoneskin);
         elseif string.contains(spell.Name, 'Refresh') then

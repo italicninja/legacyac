@@ -3,6 +3,7 @@ gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
 local sets = {
     ['idle'] = {
+        Main = "Earth Staff",
         Range = 'Ryl.Spr. Horn',
         Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
@@ -87,7 +88,6 @@ local sets = {
     },
 
     Precast = { --74
-        Main = { Name = 'Kali', AugPath='C' }, --7
         Sub = 'Genmei Shield',
         Range = { Name = 'Gjallarhorn', AugTrial=3591 },
         Neck = 'Bird Whistle',

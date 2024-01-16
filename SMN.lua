@@ -287,6 +287,11 @@ profile.HandleDefault = function()
 	end
 	local player = gData.GetPlayer()
 	local pet = gData.GetPet()
+	if (game.Time > 6.00) or (game.Time < 18.00) then
+		gFunc.EquipSet(profile.Sets.day);
+	else
+		gFunc.EquipSet(profile.Sets.night);
+	end
 	if player.Status == "Resting" then
 		gFunc.EquipSet(profile.Sets.hmp)
 	elseif pet == nil then
@@ -307,11 +312,7 @@ profile.HandleDefault = function()
 		if env.WeatherElement == petElement then
 			gFunc.Equip("head", "Summoner's Horn")
 		end
-	end
-	if (game.Time > 6.00) or (game.Time < 18.00) then
-		gFunc.EquipSet(profile.Sets.day);
-	else
-		gFunc.EquipSet(profile.Sets.night);
+
 	end
 	gcinclude.CheckDefault();
 end

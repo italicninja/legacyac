@@ -61,6 +61,7 @@ profile.Sets = {
 	perp = {
 		Body = "Austere Robe",
 		Ring1 = "Evoker's Ring",
+		Hands = "Nashira Gages",
 		Feet = "Evk. Pigaches +1",
 	},
 	hmp = {
@@ -109,7 +110,7 @@ profile.Sets = {
 		Hands = "Smn. Bracers +1",
 		Body = "Yinyang Robe",
 		Legs = "Summoner's Spats",
-		Feet = "Summoner's Pgch.",
+		Feet = "Smn. Pigaches +1",
 	},
 	['sync40'] = {
         Main = 'Kukulcan\'s Staff',
@@ -246,8 +247,6 @@ local petElement = "Light"
 
 local function HandlePetAction(PetAction)
 	local BPName = PetAction.Name
-	-- local BPName = string.sub(PetAction.Name, 1, string.len(PetAction.Name) - 1)
-	-- print(chat.header('HandlePetAction'):append(chat.message(BPName)));
 	if MagicBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.petMAB)
 	elseif PhysBP:contains(BPName) then

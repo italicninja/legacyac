@@ -24,7 +24,7 @@ gcinclude.sets = T{
     },
 	Crafting = { -- this set is meant as a default set for crafting, equip using /craftset, be sure to dbl check what rings you want to use
 		Head = 'Magnifying Specs.',
-		Body = 'Weavers\'s Apron',
+		Body = 'Weaver\'s Apron',
 		Hands = 'Tanner\'s Gloves',
 		Ring1 = 'Artificer\'s Ring',
 		Ring2 = 'Craftmaster\'s Ring',

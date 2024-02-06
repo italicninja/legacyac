@@ -1,18 +1,28 @@
 local profile = {};
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
+local staff = {
+    ['Fire'] = 'Vulkan\'s Staff',
+    ['Earth'] = 'Earth Staff',
+    ['Water'] = 'Water Staff',
+    ['Wind'] = 'Wind Staff',
+    ['Ice'] = 'Ice Staff',
+    ['Thunder'] = 'Thunder Staff',
+    ['Light'] = 'Apollo\'s Staff',
+    ['Dark'] = 'Dark Staff'
+};
+
 local sets = {
     ['idle'] = {
-        Main = "Earth Staff",
-        Range = 'Ryl.Spr. Horn',
+        Main = 'Earth Staff',
         Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
         Ear1 = 'Melody earring',
         Ear2 = 'Melody earring',
-        Body = 'Choral Jstcorps',
+        Body = 'Sha\'ir manteel',
         Hands = 'Choral Cuffs',
-        Ring1 = 'Hope Ring',
-        Ring2 = 'Hope Ring',
+        Ring1 = 'Angel\'s Ring',
+        Ring2 = 'Minstrel\'s Ring',
         Back = "Jester\'s Cape +1",
         Waist = 'Corsette',
         Legs = 'Bard\'s Cannions',
@@ -26,33 +36,13 @@ local sets = {
         Feet = "Shep. Boots",
     },
     Idle_Regen = {
-        Neck = 'Bathy Choker +1',
-        Ear1 = 'Infused Earring',
-        Ring2 = 'Chirich Ring +1',
     },
     Idle_Refresh = {
-        Main = { Name = 'Kali', AugPath='C' },
-        Legs = 'Assid. Pants +1',
-        Feet = 'Volte Gaiters',
     },
 	Town = {
 		Body = 'Ducal Aketon',
     },
-
     Dt = {
-        Sub = 'Genmei Shield',
-        Head = 'Nyame Helm',
-        Neck = { Name = 'Loricate Torque +1', AugPath='A' },
-        Ear1 = { Name = 'Odnowa Earring +1', AugPath='A' },
-        Ear2 = 'Etiolation Earring',
-        Body = 'Nyame Mail',
-        Hands = 'Nyame Gauntlets',
-        Ring1 = 'Defending Ring',
-        Ring2 = { Name = 'Gelatinous Ring +1', AugPath='A' },
-        Back = 'Solemnity Cape',
-        Waist = 'Flume Belt +1',
-        Legs = 'Nyame Flanchard',
-        Feet = 'Nyame Sollerets',
     },
     ['hp_drop'] = {
         Body = 'Bard\'s Jstcorps',
@@ -66,6 +56,7 @@ local sets = {
         Feet = 'Errant Pigaches',
     },
     ['Tp_Default'] = {
+        Range = 'Frenzy Fife',
         Head = 'Choral Roundlet',
         Neck = 'Peacock Amulet',
         Ear1 = 'Beetle Earring +1',
@@ -75,42 +66,25 @@ local sets = {
         Ring1 = 'Courage Ring',
         Ring2 = 'Courage Ring',
         Back = 'Bard\'s Cape',
-        Waist = 'Warrior\'s Belt +1',
+        Waist = 'Gleeman\'s Belt',
         Legs = 'Choral Cannions',
         Feet = 'Choral Slippers',
     },
-
     Tp_Hybrid = {
     },
     Tp_Acc = {
-        Ring1 = 'Cacoethic Ring +1',
-        Ring2 = 'Chirich Ring +1',
     },
 
-    Precast = { --74
-        Sub = 'Genmei Shield',
-        Range = { Name = 'Gjallarhorn', AugTrial=3591 },
-        Neck = 'Bird Whistle',
-        Ear1 = 'Eabani Earring',
-        Ear2 = 'Etiolation Earring', --1
-        Body = 'Inyanga Jubbah +2', --14
-        Hands = 'Leyline Gloves', --6
-        Ring1 = 'Prolix Ring', --2
-        Ring2 = 'Kishar Ring', --5
-        Waist = 'Embla Sash', --5
-        Legs = 'Bard\'s Cannions',
-        Feet = 'Volte Gaiters', --6
+    Precast = {
+        Ear2 = 'Loquac. Earring',
     },
     Cure_Precast = {
-        Ear1 = 'Mendi. Earring',
-        Feet = 'Vanya Clogs',
+        Main = staff["Light"],
+		Body = "Errant Hpl.",
     },
     Enhancing_Precast = {
-        Waist = 'Siegel Sash',
     },
     Stoneskin_Precast = {
-        Head = 'Umuthi Hat',
-        Waist = 'Siegel Sash',
     },
     hmp = {
 		Main = "Dark Staff",
@@ -120,154 +94,64 @@ local sets = {
 		Feet = "Shep. Boots",
 	},
     ['Song_Precast'] = {
-        Main = 'Paper Knife',
-        Sub = 'Minstrel\'s Dagger',
-        Range = 'Horn +1',
         Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
 		Ear1 = "Beastly earring",
         Ear2 = 'Melody earring',
-        Body = 'Choral Jstcorps',
+        Body = 'Sha\'ir manteel',
         Hands = 'Bard\'s Cuffs',
-        Ring1 = 'Hope Ring',
+        Ring1 = 'Angel\'s Ring',
         Ring2 = 'Minstrel\'s Ring',
-        Waist = 'Corsette',
+        Waist = 'Gleeman\'s Belt',
         Back = "Jester\'s Cape +1",
         Legs = 'Choral Cannions',
         Feet = 'Bard\'s Slippers',
     },
     Self_Cure = {
-        Waist = 'Gishdubar Sash',
     },
     Regen = {
-        Main = 'Bolelabunga',
-        Sub = 'Ammurapi Shield',
-        Body = 'Telchine Chas.',
-        Waist = 'Embla Sash',
-        Legs = 'Telchine Braconi',
-        Feet = 'Telchine Pigaches',
     },
     Cursna = {
-        Ring1 = 'Purity Ring',
-		Waist = 'Gishdubar Sash',
-        Feet = 'Vanya Clogs',
     },
-
     Enhancing = {
-        Head = 'Befouled Crown',
-        Neck = 'Incanter\'s Torque',
-        Ear1 = 'Mendi. Earring',
-        Ear2 = 'Andoaa Earring',
-        Body = 'Telchine Chas.',
-        Hands = 'Nyame Gauntlets',
-        Ring1 = 'Defending Ring',
-        Ring2 = { Name = 'Metamor. Ring +1', AugPath='A' },
-        Back = 'Solemnity Cape',
-        Waist = 'Embla Sash',
-        Legs = 'Telchine Braconi',
-        Feet = 'Telchine Pigaches',
     },
     Stoneskin = {
-        Neck = 'Nodens Gorget',
-        Waist = 'Siegel Sash',
     },
     Cure = {
         main = gcinclude.staves["Light"],
-		Body = "Errant Hpl.",
+        Body = 'Kirin\'s Osode',
     },
     Refresh = {
 		Waist = 'Gishdubar Sash',
     },
 
-    Enfeebling = { --need update
-        Sub = 'Ammurapi Shield',
-        Head = 'Brioso Roundlet +2',
-        Neck = 'Erra Pendant',
-        Ear1 = 'Regal Earring',
-        Ear2 = 'Crep. Earring',
-        Body = 'Brioso Justau. +2',
-        Hands = 'Brioso Cuffs +2',
-        Ring1 = 'Kishar Ring',
-        Ring2 = { Name = 'Metamor. Ring +1', AugPath='A' },
-        Back = { Name = 'Aurist\'s Cape +1', AugPath='A' },
-        Waist = { Name = 'Acuity Belt +1', AugPath='A' },
-        Legs = 'Bard\'s Cannions',
-        Feet = 'Brioso Slippers +3',
+    Enfeebling = {
     },
-
+    -- Song Types
     Wind = {
-        Main = { Name = 'Kali', AugPath='C' },
-        Sub = 'Ammurapi Shield',
-        Head = 'Brioso Roundlet +2',
-        Neck = 'Mnbw. Whistle +1',
-        Ear1 = 'Crep. Earring',
-        Ear2 = 'Regal Earring',
-        Body = 'Brioso Justau. +2',
-        Hands = 'Inyan. Dastanas +2',
-        Ring1 = 'Stikini Ring +1',
-        Ring2 = { Name = 'Metamor. Ring +1', AugPath='A' },
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
-        Waist = { Name = 'Acuity Belt +1', AugPath='A' },
-        Legs = 'Brioso Cannions +2',
-        Feet = 'Brioso Slippers +3',
+        Body = 'Choral Jstcorps',
+        Legs = 'Choral Cannions',
     },
-    Harp = {--use /forcestring in game to lock this on all songs, I personally just use Paeons
-        Range = 'Daurdabla', -- This should be ur extra song harp, whichever you use
+    String = {
+        Hands = 'Bard\'s Cuffs',
+        Neck = 'String Torque',
+        Feet = 'Bard\'s Slippers',
+    },
+    -- Specific Songs
+    Harp = {
+        Range = 'Ebony Harp +2',
     },
     Foe = {
-        Main = { Name = 'Kali', AugPath='C' },
-        Sub = 'Ammurapi Shield',
-        Range = { Name = 'Gjallarhorn', AugTrial=3591 },
-        Head = 'Brioso Roundlet +2', --bihu roundlet +3
-        Neck = 'Mnbw. Whistle +1',
-        Ear1 = 'Crep. Earring',
-        Ear2 = 'Regal Earring',
-        Body = 'Fili Hongreline +1',
-        Hands = 'Inyan. Dastanas +2', -- brioso cuffs +3
-        Ring1 = 'Stikini Ring +1',
-        Ring2 = { Name = 'Metamor. Ring +1', AugPath='A' },
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
-        Waist = { Name = 'Acuity Belt +1', AugPath='A' },
-        Legs = 'Inyanga Shalwar +2',
-        Feet = 'Brioso Slippers +3',
+        Body = 'Kirin\'s Osode',
     },
     Horde = {
-        Main = { Name = 'Kali', AugPath='C' },
-        Sub = 'Ammurapi Shield',
-        Range = 'Daurdabla',
-        Head = 'Brioso Roundlet +2',
-        Neck = 'Mnbw. Whistle +1',
-        Ear1 = 'Crep. Earring',
-        -- Ear1 = 'Gersemi Earring',
-        Ear2 = 'Regal Earring',
-        Body = 'Brioso Justau. +2',
-        Hands = 'Inyan. Dastanas +2',
-        Ring1 = 'Stikini Ring +1',
-        Ring2 = { Name = 'Metamor. Ring +1', AugPath='A' },
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
-        Waist = { Name = 'Acuity Belt +1', AugPath='A' }, -- string skill here
-        Legs = 'Inyanga Shalwar +2',
-        Feet = 'Brioso Slippers +3',
+        Range = 'Ebony Harp +2',
+        Body = 'Kirin\'s Osode',
     },
     Buff = {
-        Main = { Name = 'Kali', AugPath='C' },
-        Sub = 'Genmei Shield',
-        Range = { Name = 'Gjallarhorn', AugTrial=3591 },
-        Head = 'Fili Calot +1',
-        Neck = 'Mnbw. Whistle +1',
-        Ear1 = { Name = 'Odnowa Earring +1', AugPath='A' },
-        Ear2 = 'Etiolation Earring',
-        Body = 'Fili Hongreline +1',
-        Hands = 'Fili Manchettes +1',
-        Ring1 = 'Defending Ring',
-        Ring2 = { Name = 'Gelatinous Ring +1', AugPath='A' },
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'Damage taken-5%', [2] = '"Fast Cast"+10', [3] = 'Mag. Acc.+10', [4] = 'Mag. Acc+20', [5] = 'CHR+20', [6] = 'Magic Damage +20' } },
-        Waist = 'Flume Belt +1',
-        Legs = 'Bard\'s Cannions',
-        Feet = 'Brioso Slippers +3',
     },
     Paeon = {
-        Range = 'Maple Harp +1',
+        Range = 'Ebony Harp +2',
     },
 	Minne = {
         Range = 'Maple Harp +1',
@@ -282,13 +166,13 @@ local sets = {
         Range = 'Faerie Piccolo',
     },
     Madrigal = {
-        Head = 'Fili Calot +1',
+        Range = 'Traversiere +1',
     },
     Ballad = {
-        Legs = 'Fili Rhingrave +1',
+        Range = 'Horn +1',
     },
     Scherzo = {
-        Feet = 'Fili Cothurnes +1',
+        Range = 'Ebony Harp +2',
     },
 
     Drain = {},
@@ -371,10 +255,6 @@ profile.HandleDefault = function()
 
 	local player = gData.GetPlayer();
 
-    if (player.HPP >= 75) then
-        gFunc.EquipSet(sets['hp_drop'])
-    end
-
     if (player.Status == 'Engaged') then
         gFunc.EquipSet(sets.Tp_Default)
         if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
@@ -408,6 +288,7 @@ end
 
 profile.HandlePrecast = function()
     local spell = gData.GetAction();
+
     gFunc.EquipSet(sets.Precast)
 
     if (spell.Skill == 'Enhancing Magic') then
@@ -419,6 +300,7 @@ profile.HandlePrecast = function()
     elseif (spell.Skill == 'Healing Magic') then
         gFunc.EquipSet(sets.Cure_Precast);
     elseif (spell.Skill == 'Singing') then
+        gFunc.EquipSet(sets['hp_drop'])
         gFunc.EquipSet(sets.Song_Precast);
     end
 
@@ -482,7 +364,7 @@ profile.HandleMidcast = function()
         elseif (string.contains(spell.Name, 'March')) then
             gFunc.EquipSet(sets.March);
         elseif (string.contains(spell.Name, 'Madrigal')) then
-            gFunc.Equip("range", "Traversiere +1")
+            gFunc.EquipSet(sets.Madrigal);
         elseif (string.contains(spell.Name, 'Elegy')) then
             gFunc.EquipSet(sets.Elegy);
 		elseif (string.contains(spell.Name, 'Minne')) then

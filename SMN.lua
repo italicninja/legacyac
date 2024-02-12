@@ -48,7 +48,8 @@ profile.Sets = {
 		main = staff["Fire"],
 		Ammo = "Hedgehog Bomb",
 		Head = "Summoner\'s Horn",
-		Ear1 = "Beastly earring",
+		Ear1 = "Magnetic Earring",
+		Ear2 = "Beastly earring",
 		Ring1 = "Evoker's Ring",
 		Ring2 = "Tamas Ring",
 		Body = "Yinyang Robe",
@@ -70,6 +71,7 @@ profile.Sets = {
 		Body = "Errant Hpl.",
 		Legs = "Baron's Slops",
 		Feet = "Shep. Boots",
+		Ear1 = "Magnetic Earring",
 	},
 	Nuke = {},
 	Cure = {
@@ -78,6 +80,9 @@ profile.Sets = {
 	Stoneskin = {},
 	FastCast = {
 		Ear2 = "Loquac. Earring",
+	},
+	MidCast = {
+		Ear1 = "Magnetic Earring",
 	},
 	petMAB = {
 		Head = "Evoker's Horn",
@@ -336,6 +341,9 @@ profile.HandleMidcast = function()
 		return
 	end
 	local action = gData.GetAction()
+
+	gFunc.EquipSet(profile.Sets.MidCast)
+
 	if action.Name:contains("Cur") then
 		gFunc.EquipSet(profile.Sets.Cure)
 	elseif action.Name == "Stoneskin" then

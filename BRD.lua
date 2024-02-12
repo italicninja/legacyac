@@ -171,6 +171,9 @@ local sets = {
     Ballad = {
         Range = 'Horn +1',
     },
+    Threnody = {
+        Range = 'Sorrowful Harp',
+    },
     Scherzo = {
         Range = 'Ebony Harp +2',
     },
@@ -376,7 +379,7 @@ profile.HandleMidcast = function()
         elseif (string.contains(spell.Name, 'Ballad')) then
             gFunc.EquipSet(sets.Ballad);
         elseif (string.contains(spell.Name, 'Threnody')) then
-            gFunc.EquipSet(sets.Ballad);
+            gFunc.EquipSet(sets.Threnody);
         end
 
         if (gcdisplay.GetToggle('String') == true) then

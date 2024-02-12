@@ -424,7 +424,11 @@ end
 
 function gcinclude.SetTownGear()
 	local zone = gData.GetEnvironment();
-	if (zone.Area ~= nil) and (gcinclude.Towns:contains(zone.Area)) then gFunc.EquipSet('Town') end
+	local player = gData.GetPlayer();
+
+	if (zone.Area ~= nil) and (gcinclude.Towns:contains(zone.Area) and (player.IsMoving == true)) then
+		gFunc.EquipSet('Town')
+	end
 end
 
 function gcinclude.SetRegenRefreshGear()

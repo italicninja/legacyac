@@ -237,7 +237,7 @@ local BuffBP = T({
 	"Dream Shroud",
 })
 local DebuffBP = T({
-	"Luncar Cry",
+	"Lunar Cry",
 	"Mewing Lullaby",
 	"Nightmare",
 	"Lunar Roar",

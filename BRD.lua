@@ -59,7 +59,7 @@ local sets = {
         Range = 'Frenzy Fife',
         Head = 'Choral Roundlet',
         Neck = 'Peacock Amulet',
-        Ear1 = 'Beetle Earring +1',
+        Ear1 = 'Brutal Earring',
         Ear2 = 'Beetle Earring +1',
         Body = 'Bard\'s Jstcorps',
         Hands = 'Savage Gauntlets',
@@ -92,6 +92,7 @@ local sets = {
 		Body = "Errant Hpl.",
 		Legs = "Baron's Slops",
 		Feet = "Shep. Boots",
+		Ear1 = "Magnetic Earring",
 	},
     ['Song_Precast'] = {
         Head = 'Brd. Roundlet +1',
@@ -142,10 +143,11 @@ local sets = {
         Range = 'Ebony Harp +2',
     },
     Foe = {
+        Range = 'Nursemaid\'s Harp',
         Body = 'Kirin\'s Osode',
     },
     Horde = {
-        Range = 'Ebony Harp +2',
+        Range = 'Nursemaid\'s Harp',
         Body = 'Kirin\'s Osode',
     },
     Buff = {

@@ -80,6 +80,7 @@ profile.Sets = {
 	Stoneskin = {},
 	FastCast = {
 		Ear2 = "Loquac. Earring",
+        Feet = 'Rostrum Pumps',
 	},
 	MidCast = {
 		Ear1 = "Magnetic Earring",

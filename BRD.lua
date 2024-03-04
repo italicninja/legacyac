@@ -47,17 +47,17 @@ local sets = {
     ['hp_drop'] = {
         Body = 'Bard\'s Jstcorps',
         Hands = 'Errant Cuffs',
-        Ring1 = 'Astral Ring',
+        Ring1 = 'Ether Ring',
         Ring2 = 'Astral Ring',
 		Neck = "Checkered Scarf",
         Back = 'Blue Cape',
         Waist = 'Scouter\'s Rope',
         Legs = 'Choral Cannions',
-        Feet = 'Errant Pigaches',
+        Feet = 'Rostrum Pumps',
     },
     ['Tp_Default'] = {
         Range = 'Frenzy Fife',
-        Head = 'Choral Roundlet',
+        Head = 'Optical Hat',
         Neck = 'Peacock Amulet',
         Ear1 = 'Brutal Earring',
         Ear2 = 'Beetle Earring +1',
@@ -77,10 +77,12 @@ local sets = {
 
     Precast = {
         Ear2 = 'Loquac. Earring',
+        Feet = 'Rostrum Pumps',
     },
     Cure_Precast = {
         Main = staff["Light"],
 		Body = "Errant Hpl.",
+        Feet = 'Errant Pigaches',
     },
     Enhancing_Precast = {
     },
@@ -101,7 +103,7 @@ local sets = {
         Ear2 = 'Melody earring',
         Body = 'Sha\'ir manteel',
         Hands = 'Bard\'s Cuffs',
-        Ring1 = 'Angel\'s Ring',
+        Ring1 = 'Bomb Queen Ring',
         Ring2 = 'Minstrel\'s Ring',
         Waist = 'Gleeman\'s Belt',
         Back = "Jester\'s Cape +1",
@@ -116,7 +118,11 @@ local sets = {
     },
     Enhancing = {
     },
-    Stoneskin = {
+    Stoneskin = { -- +MND [ BASE = Enhancing/3 + MND]
+        Head = 'Choral Roundlet', -- 3 MND
+        Neck = 'Justice Badge', -- 3 MND
+        Body = 'Kirin\'s Osode', -- 10 All Stats
+        Legs = 'Choral Cannions', -- 8 MND
     },
     Cure = {
         main = gcinclude.staves["Light"],
@@ -160,6 +166,7 @@ local sets = {
     },
     Elegy = {
         Range = 'Horn +1',
+        Body = 'Kirin\'s Osode',
     },
 	Minuet = {
         Range = 'Cornette +1',
@@ -244,7 +251,7 @@ profile.OnLoad = function()
 
     AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
     AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-    AshitaCore:GetChatManager():QueueCommand(1, '/anon');
+    -- AshitaCore:GetChatManager():QueueCommand(1, '/anon');
 end
 
 profile.OnUnload = function()
@@ -257,7 +264,7 @@ end
 
 profile.HandleDefault = function()
     gFunc.EquipSet(sets.Idle);
-
+    gFunc.EquipSet(sets.hp);
 	local player = gData.GetPlayer();
 
     if (player.Status == 'Engaged') then
@@ -305,7 +312,6 @@ profile.HandlePrecast = function()
     elseif (spell.Skill == 'Healing Magic') then
         gFunc.EquipSet(sets.Cure_Precast);
     elseif (spell.Skill == 'Singing') then
-        gFunc.EquipSet(sets['hp_drop'])
         gFunc.EquipSet(sets.Song_Precast);
     end
 

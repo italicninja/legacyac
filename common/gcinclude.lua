@@ -85,7 +85,7 @@ in each individual job lua file. Unless you know what you're doing then it is be
 gcdisplay = gFunc.LoadFile('common\\gcdisplay.lua');
 
 --gcinclude.AliasList = T{'gcmessages','wsdistance','setcycle','dt','th','kite','meleeset','gcdrain','gcaspir','nukeset','burst','weapon','elecycle','helix','weather','nuke','death','fight','sir','tankset','proc','cj','pupmode','tpgun','cormsg','forcestring','siphon','warpring','telering','rrset','craftset','zeniset','fishset', 'tavring'};
-gcinclude.AliasList = T{'gcmessages','meleeset','warpring','craftset',};
+gcinclude.AliasList = T{'gcmessages','meleeset','warpring','craftset', 'tavring'};
 gcinclude.Towns = T{'Tavnazian Safehold','Al Zahbi','Aht Urhgan Whitegate','Nashmau','Southern San d\'Oria [S]','Bastok Markets [S]','Windurst Waters [S]','San d\'Oria-Jeuno Airship','Bastok-Jeuno Airship','Windurst-Jeuno Airship','Kazham-Jeuno Airship','Southern San d\'Oria','Northern San d\'Oria','Port San d\'Oria','Chateau d\'Oraguille','Bastok Mines','Bastok Markets','Port Bastok','Metalworks','Windurst Waters','Windurst Walls','Port Windurst','Windurst Woods','Heavens Tower','Ru\'Lude Gardens','Upper Jeuno','Lower Jeuno','Port Jeuno','Rabao','Selbina','Mhaura','Kazham','Norg','Mog Garden','Celennia Memorial Library','Western Adoulin','Eastern Adoulin'};
 gcinclude.LockingRings = T{'Echad Ring', 'Trizek Ring', 'Endorsement Ring', 'Capacity Ring', 'Warp Ring','Facility Ring','Dim. Ring (Dem)','Dim. Ring (Mea)','Dim. Ring (Holla)'};
 gcinclude.DistanceWS = T{'Flaming Arrow','Piercing Arrow','Dulling Arrow','Sidewinder','Blast Arrow','Arching Arrow','Empyreal Arrow','Refulgent Arrow','Apex Arrow','Namas Arrow','Jishnu\'s Randiance','Hot Shot','Split Shot','Sniper Shot','Slug Shot','Blast Shot','Heavy Shot','Detonator','Numbing Shot','Last Stand','Coronach','Wildfire','Trueflight','Leaden Salute','Myrkr','Dagan','Moonlight','Starlight'};
@@ -513,15 +513,12 @@ end
 function gcinclude.DoTavRing()
 
 	AshitaCore:GetChatManager():QueueCommand(1, '/lac equip ring2 "Tavnazian Ring"');
-
 	local function usering()
-		local function forceidleset()
-			AshitaCore:GetChatManager():QueueCommand(1, '/lac set Idle');
-		end
 		AshitaCore:GetChatManager():QueueCommand(1, '/item "Tavnazian Ring" <me>');
-		forceidleset:once(8);
 	end
-	usering:once(31);
+	usering:once(31); -- Execute after 31s?
+
+	AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable ring2');
 end
 
 function gcinclude.DoNukes(tier)

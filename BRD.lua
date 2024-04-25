@@ -1,20 +1,9 @@
 local profile = {};
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
-local staff = {
-    ['Fire'] = 'Vulkan\'s Staff',
-    ['Earth'] = 'Earth Staff',
-    ['Water'] = 'Water Staff',
-    ['Wind'] = 'Wind Staff',
-    ['Ice'] = 'Ice Staff',
-    ['Thunder'] = 'Thunder Staff',
-    ['Light'] = 'Apollo\'s Staff',
-    ['Dark'] = 'Dark Staff'
-};
-
 local sets = {
-    ['idle'] = {
-        Main = 'Earth Staff',
+    Idle = {
+        Main = gcinclude.staves["Earth"],
         Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
         Ear1 = 'Melody earring',
@@ -45,15 +34,17 @@ local sets = {
     Dt = {
     },
     ['hp_drop'] = {
-        Body = 'Bard\'s Jstcorps',
+        Main = gcinclude.staves["Earth"],
+        Head = 'Gold Hairpin',
+        Body = 'Kirin\'s Osode', -- 10 All Stats
         Hands = 'Errant Cuffs',
         Ring1 = 'Ether Ring',
         Ring2 = 'Astral Ring',
 		Neck = "Checkered Scarf",
         Back = 'Blue Cape',
         Waist = 'Scouter\'s Rope',
-        Legs = 'Choral Cannions',
-        Feet = 'Rostrum Pumps',
+		Legs = "Hydra Brais",
+        Feet = 'Rostrum Pumps', -- This slot is dead since we use R Pumps in precast
     },
     ['Tp_Default'] = {
         Range = 'Frenzy Fife',
@@ -74,13 +65,12 @@ local sets = {
     },
     Tp_Acc = {
     },
-
     Precast = {
         Ear2 = 'Loquac. Earring',
         Feet = 'Rostrum Pumps',
     },
     Cure_Precast = {
-        Main = staff["Light"],
+        Main = gcinclude.staves["Light"],
 		Body = "Errant Hpl.",
         Feet = 'Errant Pigaches',
     },
@@ -92,10 +82,25 @@ local sets = {
 		Main = "Dark Staff",
 		Neck = "Checkered Scarf",
 		Body = "Errant Hpl.",
-		Legs = "Baron's Slops",
+		Legs = "Hydra Brais",
 		Feet = "Shep. Boots",
 		Ear1 = "Magnetic Earring",
 	},
+    ['Song_Midcast'] = {
+        Head = 'Brd. Roundlet +1',
+        Neck = 'Bird Whistle',
+		Ear1 = "Beastly earring",
+        Ear2 = 'Melody earring',
+        Body = 'Kirin\'s Osode',
+        Hands = 'Bard\'s Cuffs',
+        Ring1 = 'Angel\'s Ring',
+        Ring2 = 'Angel\'s Ring',
+        Waist = 'Gleeman\'s Belt',
+        Back = "Jester\'s Cape +1",
+        Legs = 'Bard\'s Cannions',
+        Feet = 'Bard\'s Slippers',
+    },
+    -- Should be HP+ aand any precast stuff like Minstrel's Ring and Manteel
     ['Song_Precast'] = {
         Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
@@ -108,7 +113,6 @@ local sets = {
         Waist = 'Gleeman\'s Belt',
         Back = "Jester\'s Cape +1",
         Legs = 'Choral Cannions',
-        Feet = 'Bard\'s Slippers',
     },
     Self_Cure = {
     },
@@ -163,6 +167,9 @@ local sets = {
     },
 	Minne = {
         Range = 'Maple Harp +1',
+    },
+    Mazurka = {
+        Range = 'Harlequin\'s Horn',
     },
     Elegy = {
         Range = 'Horn +1',
@@ -225,7 +232,7 @@ local sets = {
     Savage_Hybrid = {},
     Savage_Acc = {},
 
-    Nitro = {--includes legs for soul voice as well
+    Nitro = {
         Body = 'Bihu Jstcorps. +3',
         Legs = 'Bihu Cannions +1',
         Feet = 'Bihu Slippers +3',
@@ -263,8 +270,8 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-    gFunc.EquipSet(sets.Idle);
-    gFunc.EquipSet(sets.hp);
+    --gFunc.EquipSet(sets.Idle);
+    gFunc.EquipSet(sets['hp_drop']); -- Idle in -HP gear
 	local player = gData.GetPlayer();
 
     if (player.Status == 'Engaged') then
@@ -301,7 +308,7 @@ end
 profile.HandlePrecast = function()
     local spell = gData.GetAction();
 
-    gFunc.EquipSet(sets.Precast)
+    gFunc.EquipSet(sets.Precast) -- Base Precast Gear
 
     if (spell.Skill == 'Enhancing Magic') then
         gFunc.EquipSet(sets.Enhancing_Precast);
@@ -360,6 +367,7 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Drain);
         end
     elseif (spell.Skill == 'Singing') then
+        gFunc.EquipSet(sets.Song_Midcast);
         if (string.contains(spell.Name, 'Paeon')) or (string.contains(spell.Name, 'Mazurka')) then
             gFunc.EquipSet(sets.Paeon);
         else
@@ -388,6 +396,8 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Ballad);
         elseif (string.contains(spell.Name, 'Threnody')) then
             gFunc.EquipSet(sets.Threnody);
+        elseif (string.contains(spell.Name, 'Mazurka')) then
+            gFunc.EquipSet(sets.Mazurka);
         end
 
         if (gcdisplay.GetToggle('String') == true) then

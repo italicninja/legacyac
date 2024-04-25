@@ -51,7 +51,6 @@ profile.Sets = {
 		Ear1 = "Magnetic Earring",
 		Ear2 = "Beastly earring",
 		Ring1 = "Evoker's Ring",
-		Ring2 = "Tamas Ring",
 		Body = "Yinyang Robe",
 		Hands = "Smn. Bracers +1",
 		Back = "Summoner's Cape",
@@ -60,7 +59,7 @@ profile.Sets = {
 		Feet = "Nashira Crackows",
 	},
 	perp = {
-		Body = "Austere Robe",
+		Body = "Yinyang Robe", -- Not really perp but the +1 Refresh is kinda like it
 		Ring1 = "Evoker's Ring",
 		Hands = "Nashira Gages",
 		Feet = "Evk. Pigaches +1",
@@ -69,11 +68,12 @@ profile.Sets = {
 		Main = "Dark Staff",
 		Neck = "Checkered Scarf",
 		Body = "Errant Hpl.",
-		Legs = "Baron's Slops",
-		Feet = "Shep. Boots",
+		Legs = "Hydra Brais",
 		Ear1 = "Magnetic Earring",
 	},
-	Nuke = {},
+	Nuke = {
+		Hands = "Nashira Gages", -- MaCC
+	},
 	Cure = {
 		main = staff["Light"],
 	},
@@ -88,7 +88,6 @@ profile.Sets = {
 	petMAB = {
 		Head = "Evoker's Horn",
 		Neck = "Smn. Torque",
-		Body = "Shep. Tunic",
 		Hands = "Smn. Bracers +1",
 		Ring1 = "Evoker's Ring",
 	},
@@ -112,7 +111,7 @@ profile.Sets = {
 		Ring1 = "Evoker's Ring",
 	},
 	BPDelay = {
-		Head = "Summoner\'s Horn",
+		Head = "Smn. Horn +1",
 		Hands = "Smn. Bracers +1",
 		Body = "Yinyang Robe",
 		Legs = "Summoner's Spats",
@@ -165,6 +164,22 @@ profile.Sets = {
         Waist = 'Friar\'s Rope',
         Legs = 'Savage Loincloth',
         Feet = 'Savage Gaiters',
+    },
+    ['tp_default'] = {
+        Main = 'Pole of Trials',
+        Ammo = 'Hedgehog Bomb',
+        Head = 'Optical Hat',
+        Neck = 'Peacock Amulet',
+        Ear1 = 'Magnetic Earring',
+        Ear2 = 'Brutal Earring',
+        Body = 'Yinyang Robe',
+        Hands = 'Carbuncle Mitts',
+        Ring1 = 'Evoker\'s Ring',
+        Ring2 = 'Tamas Ring',
+        Back = 'Summoner\'s Cape',
+        Waist = 'Hierarch Belt',
+		Legs = "Hydra Brais",
+        Feet = 'Evk. Pigaches +1',
     },
 }
 
@@ -292,30 +307,31 @@ profile.HandleDefault = function()
 	end
 	local player = gData.GetPlayer()
 	local pet = gData.GetPet()
+	local env = gData.GetEnvironment()
+
 	if (game.Time > 6.00) or (game.Time < 18.00) then
 		gFunc.EquipSet(profile.Sets.day);
 	else
 		gFunc.EquipSet(profile.Sets.night);
 	end
-	if player.Status == "Resting" then
+	if (player.Status == 'Engaged') then
+        gFunc.EquipSet(profile.Sets.tp_default)
+	elseif player.Status == "Resting" then
 		gFunc.EquipSet(profile.Sets.hmp)
 	elseif pet == nil then
 		gFunc.EquipSet(profile.Sets.Idle)
 	else
 		gFunc.EquipSet(profile.Sets.perp)
 		gFunc.Equip("main", gcinclude.staves[petElement])
-		local env = gData.GetEnvironment()
 		if pet.Name == "Carbuncle" then
 			gFunc.Equip("hands", "Carbuncle Mitts")
 		end
-		if env.DayElement == petElement then
-			gFunc.Equip("body", "Summoner's Dblt.")
-			if pet.Name == "Carbuncle" then
-				gFunc.Equip("body", "Yinyang Robe")
-			end
+		if (env.DayElement == petElement) and (pet.Name ~= "Carbuncle") then
+			-- print(chat.header('GCinclude'):append(chat.message("Day: " .. env.DayElement .. " Pet: " .. petElement)));
+			gFunc.Equip("body", 'Smn. Doublet +1')
 		end
 		if env.WeatherElement == petElement then
-			gFunc.Equip("head", "Summoner's Horn")
+			gFunc.Equip("head", "Smn. Horn +1")
 		end
 
 	end

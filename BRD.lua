@@ -5,24 +5,25 @@ local sets = {
     Idle = {
         Main = gcinclude.staves["Earth"],
         Head = 'Brd. Roundlet +1',
-        Neck = 'Bird Whistle',
-        Ear1 = 'Melody earring',
-        Ear2 = 'Melody earring',
-        Body = 'Sha\'ir manteel',
-        Hands = 'Choral Cuffs',
-        Ring1 = 'Angel\'s Ring',
-        Ring2 = 'Minstrel\'s Ring',
-        Back = "Jester\'s Cape +1",
-        Waist = 'Corsette',
-        Legs = 'Bard\'s Cannions',
-        Feet = 'Savage Gaiters',
+        Neck = 'Bird Whistle', -- Wind Torque
+        Ear1 = 'Loquac. Earring',
+        Ear2 = 'Musical Earring',
+        Body = 'Sha\'ir manteel', -- Royal Cloak
+        Hands = 'Choral Cuffs', -- Zenith Mitts
+        Ring1 = 'Astral Ring',
+        Ring2 = 'Ether Ring',
+        Back = "Jester\'s Cape +1",  -- Astute Cape
+        Waist = 'Gleeman\'s Belt',
+        Legs = 'Bard\'s Cannions', -- Zenith slacks
+        Feet = 'Rostrum Pumps',
+        Range = 'Hamelin Flute',
     },
     Resting = {
-        Main = "Dark Staff",
-        Neck = "Checkered Scarf",
-        Body = "Errant Hpl.",
-        Legs = "Baron's Slops",
-        Feet = "Shep. Boots",
+        Main = gcinclude.staves["Dark"],
+		Neck = "Checkered Scarf",
+		Body = "Errant Hpl.",
+		Legs = "Hydra Brais",
+		Ear1 = "Magnetic Earring",
     },
     Idle_Regen = {
     },
@@ -44,7 +45,7 @@ local sets = {
         Back = 'Blue Cape',
         Waist = 'Scouter\'s Rope',
 		Legs = "Hydra Brais",
-        Feet = 'Rostrum Pumps', -- This slot is dead since we use R Pumps in precast
+        Feet = 'Rostrum Pumps',
     },
     ['Tp_Default'] = {
         Range = 'Frenzy Fife',
@@ -61,6 +62,8 @@ local sets = {
         Legs = 'Choral Cannions',
         Feet = 'Choral Slippers',
     },
+    Ws_Default = {
+    },
     Tp_Hybrid = {
     },
     Tp_Acc = {
@@ -74,25 +77,14 @@ local sets = {
 		Body = "Errant Hpl.",
         Feet = 'Errant Pigaches',
     },
-    Enhancing_Precast = {
-    },
-    Stoneskin_Precast = {
-    },
-    hmp = {
-		Main = "Dark Staff",
-		Neck = "Checkered Scarf",
-		Body = "Errant Hpl.",
-		Legs = "Hydra Brais",
-		Feet = "Shep. Boots",
-		Ear1 = "Magnetic Earring",
-	},
-    ['Song_Midcast'] = {
+    Enhancing_Precast = {},
+    ['Song_Midcast'] = { -- + Skill and Stuff
         Head = 'Brd. Roundlet +1',
         Neck = 'Bird Whistle',
 		Ear1 = "Beastly earring",
-        Ear2 = 'Melody earring',
+        Ear2 = 'Musical earring',
         Body = 'Kirin\'s Osode',
-        Hands = 'Bard\'s Cuffs',
+        Hands = 'Choral\'s Cuffs',
         Ring1 = 'Angel\'s Ring',
         Ring2 = 'Angel\'s Ring',
         Waist = 'Gleeman\'s Belt',
@@ -100,28 +92,26 @@ local sets = {
         Legs = 'Bard\'s Cannions',
         Feet = 'Bard\'s Slippers',
     },
-    -- Should be HP+ aand any precast stuff like Minstrel's Ring and Manteel
+    -- Should be HP+ and any precast stuff like Minstrel's Ring and Manteel
     ['Song_Precast'] = {
+        Main = "Chanter's Staff",
         Head = 'Brd. Roundlet +1',
-        Neck = 'Bird Whistle',
-		Ear1 = "Beastly earring",
-        Ear2 = 'Melody earring',
+        Neck = 'Bird Whistle', -- Shield Pendant
+        Ear1 = 'Loquac. Earring',
+        Ear2 = 'Musical Earring',
+        Feet = 'Rostrum Pumps',
         Body = 'Sha\'ir manteel',
-        Hands = 'Bard\'s Cuffs',
+        Hands = 'Bard\'s Cuffs', -- Sha'ir Gages
         Ring1 = 'Bomb Queen Ring',
         Ring2 = 'Minstrel\'s Ring',
         Waist = 'Gleeman\'s Belt',
-        Back = "Jester\'s Cape +1",
-        Legs = 'Choral Cannions',
+        Back = "Jester\'s Cape +1", -- Astute Cape
+        Legs = 'Bard\'s Cannions',
     },
-    Self_Cure = {
-    },
-    Regen = {
-    },
-    Cursna = {
-    },
-    Enhancing = {
-    },
+    Self_Cure = {},
+    Regen = {},
+    Cursna = {},
+    Enhancing = {},
     Stoneskin = { -- +MND [ BASE = Enhancing/3 + MND]
         Head = 'Choral Roundlet', -- 3 MND
         Neck = 'Justice Badge', -- 3 MND
@@ -132,119 +122,80 @@ local sets = {
         main = gcinclude.staves["Light"],
         Body = 'Kirin\'s Osode',
     },
-    Refresh = {
-		Waist = 'Gishdubar Sash',
-    },
-
-    Enfeebling = {
-    },
+    Refresh = {},
+    Enfeebling = {},
     -- Song Types
     Wind = {
         Body = 'Choral Jstcorps',
         Legs = 'Choral Cannions',
+        Ear2 = 'Musical Earring',
     },
     String = {
         Hands = 'Bard\'s Cuffs',
         Neck = 'String Torque',
         Feet = 'Bard\'s Slippers',
+        Ear2 = 'Musical Earring',
     },
     -- Specific Songs
     Harp = {
         Range = 'Ebony Harp +2',
     },
-    Foe = {
+    Lullaby = { -- Debuff Song: Lullaby (Stack CHR) *Includes Haste gear*
         Range = 'Nursemaid\'s Harp',
         Body = 'Kirin\'s Osode',
     },
-    Horde = {
-        Range = 'Nursemaid\'s Harp',
-        Body = 'Kirin\'s Osode',
-    },
-    Buff = {
-    },
-    Paeon = {
+    Buff = { },
+    Paeon = { -- Buff Song: Paeon (Stack Singing/String Skill) *Includes Haste gear*
         Range = 'Ebony Harp +2',
     },
-	Minne = {
+	Minne = { -- Buff Song: Minuet (Stack Singing/Wind Skill) *Includes Haste gear*
         Range = 'Maple Harp +1',
     },
-    Mazurka = {
+    Mazurka = { -- Buff Song: Mazurka (--) *Includes Haste gear*
         Range = 'Harlequin\'s Horn',
     },
-    Elegy = {
+    Etude = { -- Buff Song: Etude (Stack Singing/String Skill) *Includes Haste gear*
+        Range = 'Rose Harp +1',
+    },
+    Elegy = { -- Debuff Song: Elegy (Stack CHR & Singing/Wind Skill) *Includes Haste gear*
         Range = 'Horn +1',
-        Body = 'Kirin\'s Osode',
+    },
+    Finale = { -- Debuff Song: Finale (Stack CHR) *Includes Haste gear*
+        Range = 'Hamelin Flute',
     },
 	Minuet = {
         Range = 'Cornette +1',
     },
-    March = {
+    March = { -- Buff Song: March (Stack Singing/Wind Skill) *Includes Haste gear*
         Range = 'Faerie Piccolo',
     },
     Madrigal = {
         Range = 'Traversiere +1',
     },
-    Ballad = {
+    Ballad = { -- Buff Song: Ballad (Stack Haste)
         Range = 'Horn +1',
     },
     Threnody = {
         Range = 'Sorrowful Harp',
     },
+    Carol = { -- Buff Song: Carol (Stack Singing/Wind Skill)
+        Range = 'Crumhorn +1',
+    },
     Scherzo = {
         Range = 'Ebony Harp +2',
     },
-
     Drain = {},
     Nuke = {},
     Preshot = {},
-    Midshot = {
-        Ear1 = 'Telos Earring',
-        Ear2 = 'Crep. Earring',
-    },
-
-    Ws_Default = {
-        Range = 'Linos',
-        Head = 'Nyame Helm',
-        Neck = 'Fotia Gorget',
-        Ear1 = 'Mache Earring +1',
-        Ear2 = 'Telos Earring',
-        Body = 'Bihu Jstcorps. +3',
-        Hands = 'Nyame Gauntlets',
-        Ring1 = 'Petrov Ring',
-        Ring2 = 'Karieyh Ring +1',
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'STR+7', [2] = 'Weapon skill damage +10%', [3] = 'Attack+6', [4] = 'Accuracy+6' } },
-        Waist = 'Fotia Belt',
-        Legs = 'Nyame Flanchard',
-        Feet = 'Bihu Slippers +3',
-    },
+    Midshot = {},
     Ws_Hybrid = {},
     Ws_Acc = {},
-
-    Savage_Default = {
-        Range = 'Linos',
-        Neck = 'Bard\'s Charm +1',
-        Body = 'Bihu Jstcorps. +3',
-        Ring1 = 'Petrov Ring',
-        Ring2 = 'Karieyh Ring +1',
-        Back = { Name = 'Intarabus\'s Cape', Augment = { [1] = 'STR+7', [2] = 'Weapon skill damage +10%', [3] = 'Attack+6', [4] = 'Accuracy+6' } },
-        Waist = { Name = 'Sailfi Belt +1', AugPath='A' },
-    },
+    Savage_Default = {},
     Savage_Hybrid = {},
     Savage_Acc = {},
-
-    Nitro = {
-        Body = 'Bihu Jstcorps. +3',
-        Legs = 'Bihu Cannions +1',
-        Feet = 'Bihu Slippers +3',
-    },
-
-    TH = {
-        Ammo = 'Per. Lucky Egg',
-		Waist = 'Chaac Belt',
-	},
-    Movement = {
-        Feet = 'Fili Cothurnes +1',
-	},
+    Nitro = {},
+    TH = {},
+    Movement = {},
 };
 profile.Sets = sets;
 
@@ -270,8 +221,8 @@ profile.HandleCommand = function(args)
 end
 
 profile.HandleDefault = function()
-    --gFunc.EquipSet(sets.Idle);
-    gFunc.EquipSet(sets['hp_drop']); -- Idle in -HP gear
+    gFunc.EquipSet(sets.Idle);
+    --gFunc.EquipSet(sets['hp_drop']); -- Idle in -HP gear
 	local player = gData.GetPlayer();
 
     if (player.Status == 'Engaged') then
@@ -292,9 +243,9 @@ profile.HandleDefault = function()
 end
 
 profile.HandleAbility = function()
-    local ability = gData.GetAction();
+    -- local ability = gData.GetAction();
 
-    if string.match(ability.Name, 'Troubadour') or string.match(ability.Name, 'Nightingale') or string.match(ability.Name, 'Soul Voice') then gFunc.EquipSet(sets.Nitro) end
+    -- if string.match(ability.Name, 'Troubadour') or string.match(ability.Name, 'Nightingale') or string.match(ability.Name, 'Soul Voice') then gFunc.EquipSet(sets.Nitro) end
 
     --gcinclude.CheckCancels();
 end
@@ -312,10 +263,6 @@ profile.HandlePrecast = function()
 
     if (spell.Skill == 'Enhancing Magic') then
         gFunc.EquipSet(sets.Enhancing_Precast);
-
-        if string.contains(spell.Name, 'Stoneskin') then
-            gFunc.EquipSet(sets.Stoneskin_Precast);
-        end
     elseif (spell.Skill == 'Healing Magic') then
         gFunc.EquipSet(sets.Cure_Precast);
     elseif (spell.Skill == 'Singing') then
@@ -368,18 +315,8 @@ profile.HandleMidcast = function()
         end
     elseif (spell.Skill == 'Singing') then
         gFunc.EquipSet(sets.Song_Midcast);
-        if (string.contains(spell.Name, 'Paeon')) or (string.contains(spell.Name, 'Mazurka')) then
-            gFunc.EquipSet(sets.Paeon);
-        else
-            gFunc.EquipSet(sets.Buff);
-        end
-        if (string.contains(spell.Name, 'Requiem')) or (string.contains(spell.Name, 'Elegy')) or (string.contains(spell.Name, 'Finale')) or (string.contains(spell.Name, 'Lullaby')) then
-            gFunc.EquipSet(sets.Wind);
-        end
-        if (string.contains(spell.Name, 'Horde Lullaby')) then
-            gFunc.EquipSet(sets.Horde);
-        elseif (string.contains(spell.Name, 'Foe Lullaby')) then
-            gFunc.EquipSet(sets.Foe);
+        if (string.contains(spell.Name, 'Lullaby')) then
+            gFunc.EquipSet(sets.Lullaby);
         elseif (string.contains(spell.Name, 'March')) then
             gFunc.EquipSet(sets.March);
         elseif (string.contains(spell.Name, 'Madrigal')) then
@@ -398,6 +335,8 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Threnody);
         elseif (string.contains(spell.Name, 'Mazurka')) then
             gFunc.EquipSet(sets.Mazurka);
+        elseif (string.contains(spell.Name, 'Carol')) then
+            gFunc.EquipSet(sets.Carol);
         end
 
         if (gcdisplay.GetToggle('String') == true) then

@@ -131,7 +131,7 @@ profile.Sets = {
         Waist = 'Friar\'s Rope',
         Legs = 'Savage Loincloth',
         Feet = 'Savage Gaiters',
-		Range = 'Fortune Egg',
+		Ammo = 'Fortune Egg',
     },
 	Town = {
 		Body = 'Ducal Aketon',

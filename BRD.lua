@@ -9,10 +9,10 @@ local sets = {
         Ear1 = 'Loquac. Earring',
         Ear2 = 'Musical Earring',
         Body = 'Sha\'ir manteel', -- Royal Cloak
-        Hands = 'Choral Cuffs', -- Zenith Mitts
+        Hands = 'Chl. Cuffs +1', -- Zenith Mitts
         Ring1 = 'Astral Ring',
         Ring2 = 'Ether Ring',
-        Back = "Jester\'s Cape +1",  -- Astute Cape
+        Back = "Blue Cape",  -- Astute Cape
         Waist = 'Gleeman\'s Belt',
         Legs = 'Bard\'s Cannions', -- Zenith slacks
         Feet = 'Rostrum Pumps',
@@ -56,10 +56,10 @@ local sets = {
         Body = 'Bard\'s Jstcorps',
         Hands = 'Savage Gauntlets',
         Ring1 = 'Courage Ring',
-        Ring2 = 'Courage Ring',
+        Ring2 = 'Rajas Ring',
         Back = 'Bard\'s Cape',
-        Waist = 'Gleeman\'s Belt',
-        Legs = 'Choral Cannions',
+        Waist = 'Swift Belt',
+		Legs = "Hydra Brais",
         Feet = 'Choral Slippers',
     },
     Ws_Default = {
@@ -104,7 +104,7 @@ local sets = {
         Hands = 'Bard\'s Cuffs', -- Sha'ir Gages
         Ring1 = 'Bomb Queen Ring',
         Ring2 = 'Minstrel\'s Ring',
-        Waist = 'Gleeman\'s Belt',
+        Waist = 'Swift Belt',
         Back = "Jester\'s Cape +1", -- Astute Cape
         Legs = 'Bard\'s Cannions',
     },
@@ -167,7 +167,20 @@ local sets = {
         Range = 'Cornette +1',
     },
     March = { -- Buff Song: March (Stack Singing/Wind Skill) *Includes Haste gear*
+        Main = "Chanter's Staff",
         Range = 'Faerie Piccolo',
+        Head = "Brd. Roundlet +1",
+        Body = "Minstrel's Coat",
+        Hands = "Chl. Cuffs +1",
+        Legs = "Chl. Cannions +1",
+        Feet = "Rostrum Pumps",
+        Back = "Astute Cape",
+        Neck = "Wind Torque",
+        Waist = "Gleeman's Belt",
+        Ear1 = "Beastly Earring,",
+        Ear2 = "Musical Earring",
+        Ring1 = "Minstrel's Ring",
+        Ring2 = "Angel's Ring",
     },
     Madrigal = {
         Range = 'Traversiere +1',
@@ -319,6 +332,8 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Lullaby);
         elseif (string.contains(spell.Name, 'March')) then
             gFunc.EquipSet(sets.March);
+        elseif (string.contains(spell.Name, 'Paeon')) then
+            gFunc.EquipSet(sets.Paeon);
         elseif (string.contains(spell.Name, 'Madrigal')) then
             gFunc.EquipSet(sets.Madrigal);
         elseif (string.contains(spell.Name, 'Elegy')) then

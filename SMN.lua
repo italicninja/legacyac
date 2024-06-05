@@ -3,7 +3,7 @@
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
 local staff = {
-    ['Fire'] = 'Vulkan\'s Staff',
+    ['Fire'] = 'Vulcan\'s Staff',
     ['Earth'] = 'Earth Staff',
     ['Water'] = 'Water Staff',
     ['Wind'] = 'Wind Staff',

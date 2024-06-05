@@ -13,8 +13,8 @@ local sets = {
         Ring1 = 'Astral Ring',
         Ring2 = 'Ether Ring',
         Back = "Blue Cape",  -- Astute Cape
-        Waist = 'Gleeman\'s Belt',
-        Legs = 'Bard\'s Cannions', -- Zenith slacks
+        Waist = 'Scouter\'s Rope',
+        Legs = 'Hydra Brais', -- Zenith slacks
         Feet = 'Rostrum Pumps',
         Range = 'Hamelin Flute',
     },
@@ -25,28 +25,12 @@ local sets = {
 		Legs = "Hydra Brais",
 		Ear1 = "Magnetic Earring",
     },
-    Idle_Regen = {
-    },
-    Idle_Refresh = {
-    },
+    Idle_Regen = { },
+    Idle_Refresh = { },
 	Town = {
 		Body = 'Ducal Aketon',
     },
-    Dt = {
-    },
-    ['hp_drop'] = {
-        Main = gcinclude.staves["Earth"],
-        Head = 'Gold Hairpin',
-        Body = 'Kirin\'s Osode', -- 10 All Stats
-        Hands = 'Errant Cuffs',
-        Ring1 = 'Ether Ring',
-        Ring2 = 'Astral Ring',
-		Neck = "Checkered Scarf",
-        Back = 'Blue Cape',
-        Waist = 'Scouter\'s Rope',
-		Legs = "Hydra Brais",
-        Feet = 'Rostrum Pumps',
-    },
+    Dt = {},
     ['Tp_Default'] = {
         Range = 'Frenzy Fife',
         Head = 'Optical Hat',
@@ -94,19 +78,19 @@ local sets = {
     },
     -- Should be HP+ and any precast stuff like Minstrel's Ring and Manteel
     ['Song_Precast'] = {
-        Main = "Chanter's Staff",
-        Head = 'Brd. Roundlet +1',
-        Neck = 'Bird Whistle', -- Shield Pendant
+        Back = "Jester\'s Cape +1", -- Astute Cape
+        Body = 'Sha\'ir manteel',
         Ear1 = 'Loquac. Earring',
         Ear2 = 'Musical Earring',
         Feet = 'Rostrum Pumps',
-        Body = 'Sha\'ir manteel',
         Hands = 'Bard\'s Cuffs', -- Sha'ir Gages
-        Ring1 = 'Bomb Queen Ring',
-        Ring2 = 'Minstrel\'s Ring',
-        Waist = 'Swift Belt',
-        Back = "Jester\'s Cape +1", -- Astute Cape
-        Legs = 'Bard\'s Cannions',
+        Head = 'Genbu\'s Kabuto',
+        Legs = 'Bard\'s Cannions', -- Zenith slacks
+        Main = "Chanter's Staff",
+        Neck = 'Shield Pendant',
+        Ring2 = 'Bomb Queen Ring',
+        Ring1 = 'Minstrel\'s Ring',
+        Waist = 'Gleeman\'s Belt',
     },
     Self_Cure = {},
     Regen = {},
@@ -186,7 +170,20 @@ local sets = {
         Range = 'Traversiere +1',
     },
     Ballad = { -- Buff Song: Ballad (Stack Haste)
-        Range = 'Horn +1',
+        Main = "Chanter's Staff",
+        Range = 'Faerie Piccolo',
+        Head = "Brd. Roundlet +1",
+        Body = "Sha'ir Manteel",
+        Hands = "Chl. Cuffs +1",
+        Legs = "Chl. Cannions +1",
+        Feet = "Sha'ir Crackows",
+        Back = "Astute Cape",
+        Neck = "Wind Torque",
+        Waist = "Swift Belt",
+        Ear1 = "Beastly Earring,",
+        Ear2 = "Musical Earring",
+        Ring1 = "Angel's Ring",
+        Ring2 = "Angel's Ring",
     },
     Threnody = {
         Range = 'Sorrowful Harp',
@@ -235,7 +232,6 @@ end
 
 profile.HandleDefault = function()
     gFunc.EquipSet(sets.Idle);
-    --gFunc.EquipSet(sets['hp_drop']); -- Idle in -HP gear
 	local player = gData.GetPlayer();
 
     if (player.Status == 'Engaged') then

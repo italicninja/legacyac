@@ -68,7 +68,7 @@ gcinclude.settings = {
 };
 
 gcinclude.staves = {
-    ['Fire'] = 'Vulkan\'s Staff',
+    ['Fire'] = 'Vulcan\'s Staff',
     ['Earth'] = 'Earth Staff',
     ['Water'] = 'Water Staff',
     ['Wind'] = 'Wind Staff',

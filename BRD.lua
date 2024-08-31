@@ -14,7 +14,7 @@ local sets = {
         Ring2 = 'Ether Ring',
         Back = "Blue Cape",  -- Astute Cape
         Waist = 'Scouter\'s Rope',
-        Legs = 'Hydra Brais', -- Zenith slacks
+        Legs = 'Zenith Slacks',
         Feet = 'Rostrum Pumps',
         Range = 'Hamelin Flute',
     },
@@ -156,6 +156,22 @@ local sets = {
         Ring1 = "Angel's ring",
         Ring2 = "Luftpause Mark",
         Range = 'Horn +1'
+    },
+    Requiem = { -- Debuff Song: Elegy (Stack CHR & Singing/Wind Skill) *Includes Haste gear*
+        Main = "Chanter's Staff",
+        Head = "Brd. Roundlet +1",
+        Body = "Kirin's Osode",
+        Hands = "Chl. Cuffs +1",
+        Legs = "Chl. Cannions +1",
+        Feet = "Sha'ir Crackows",
+        Back = "Jester's Cape +1",
+        Neck = "Wind Torque",
+        Waist = "Gleeman's Belt",
+        Ear1 = "Beastly Earring",
+        Ear2 = "Musical Earring",
+        Ring1 = "Angel's ring",
+        Ring2 = "Luftpause Mark",
+        Range = 'Shofar +1'
     },
     Finale = { -- Debuff Song: Finale (Stack CHR) *Includes Haste gear*
         Main = "Chanter's Staff",
@@ -311,8 +327,8 @@ profile.HandleMidcast = function()
     local weather = gData.GetEnvironment();
     local spell = gData.GetAction();
     local target = gData.GetActionTarget();
-    local me = AshitaCore:GetMemoryManager():GetParty():GetMemberName(0);
-
+    local me = AshitaCore:GetMemoryManager():GetPlayer();
+    local singSkill = me:GetAttack();
     if (spell.Skill == 'Enhancing Magic') then
         gFunc.EquipSet(sets.Enhancing);
 
@@ -372,6 +388,8 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Threnody);
         elseif (string.contains(spell.Name, 'Mazurka')) then
             gFunc.EquipSet(sets.Mazurka);
+        elseif (string.contains(spell.Name, 'Requiem')) then
+            gFunc.EquipSet(sets.Requiem);
         elseif (string.contains(spell.Name, 'Carol')) then
             gFunc.EquipSet(sets.Carol);
         end

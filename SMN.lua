@@ -2,17 +2,6 @@
 
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
-local staff = {
-    ['Fire'] = 'Vulcan\'s Staff',
-    ['Earth'] = 'Earth Staff',
-    ['Water'] = 'Water Staff',
-    ['Wind'] = 'Wind Staff',
-    ['Ice'] = 'Ice Staff',
-    ['Thunder'] = 'Thunder Staff',
-    ['Light'] = 'Apollo\'s Staff',
-    ['Dark'] = 'Dark Staff'
-};
-
 local bookSMN = 2  -- Macro Book for SMN
 local pageIdle = 1  -- Macro Page to Idle on
 
@@ -45,12 +34,13 @@ local petMacroPage = {
 local profile = {}
 profile.Sets = {
 	Idle = {
-		main = staff["Fire"],
+		--main = staff["Fire"],
 		Ammo = "Hedgehog Bomb",
 		Head = "Smn. Horn +1",
 		Ear1 = "Magnetic Earring",
 		Ear2 = "Beastly earring",
 		Ring1 = "Evoker's Ring",
+		Ring2 = "Ether Ring",
 		Body = "Yinyang Robe",
 		Hands = "Smn. Bracers +1",
 		Back = "Summoner's Cape",
@@ -59,13 +49,13 @@ profile.Sets = {
 		Feet = "Nashira Crackows",
 	},
 	perp = {
-		Body = "Yinyang Robe", -- Not really perp but the +1 Refresh is kinda like it
+		--Body = "Yinyang Robe", -- Not really perp but the +1 Refresh is kinda like it
 		Ring1 = "Evoker's Ring",
 		Hands = "Nashira Gages",
 		Feet = "Evk. Pigaches +1",
 	},
 	hmp = {
-		Main = "Dark Staff",
+		Main = gcinclude.staves['Dark'],
 		Neck = "Checkered Scarf",
 		Body = "Errant Hpl.",
 		Legs = "Hydra Brais",
@@ -75,7 +65,7 @@ profile.Sets = {
 		Hands = "Nashira Gages", -- MaCC
 	},
 	Cure = {
-		main = staff["Light"],
+		main = gcinclude.staves['Light'],
 	},
 	Stoneskin = {},
 	FastCast = {
@@ -152,7 +142,6 @@ profile.Sets = {
 	pet_Dt = {
     },
     ['sync60'] = {
-        Main = 'Dark Staff',
         Head = 'Evoker\'s Horn',
         Neck = 'Checkered Scarf',
         Ear1 = 'Onyx Earring',
@@ -167,7 +156,6 @@ profile.Sets = {
         Feet = 'Savage Gaiters',
     },
     ['tp_default'] = {
-        Main = 'Pole of Trials',
         Ammo = 'Hedgehog Bomb',
         Head = 'Optical Hat',
         Neck = 'Peacock Amulet',
@@ -327,7 +315,7 @@ profile.HandleDefault = function()
 		if pet.Name == "Carbuncle" then
 			gFunc.Equip("hands", "Carbuncle Mitts")
 		end
-		if (env.DayElement == petElement) and (pet.Name ~= "Carbuncle") then
+		if (env.DayElement == petElement) then --and (pet.Name ~= "Carbuncle")
 			-- print(chat.header('GCinclude'):append(chat.message("Day: " .. env.DayElement .. " Pet: " .. petElement)));
 			gFunc.Equip("body", 'Smn. Doublet +1')
 		end
@@ -349,7 +337,11 @@ end
 profile.HandleItem = function() end
 
 profile.HandlePrecast = function()
+	local action = gData.GetAction()
 	gFunc.EquipSet(profile.Sets.FastCast)
+	if action.Skill == "Summoning" then
+        gFunc.Equip("feet", "Evoker's Boots") -- -1 Summoning Cast Time
+	end
 end
 
 profile.HandleMidcast = function()

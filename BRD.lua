@@ -85,7 +85,7 @@ local sets = {
         Feet = 'Rostrum Pumps',
         Hands = 'Bard\'s Cuffs', -- Sha'ir Gages
         Head = 'Genbu\'s Kabuto',
-        Legs = 'Bard\'s Cannions', -- Zenith slacks
+        Legs = 'Zenith Slacks',
         Main = "Chanter's Staff",
         Neck = 'Shield Pendant',
         Ring2 = 'Bomb Queen Ring',
@@ -251,6 +251,8 @@ local sets = {
 };
 profile.Sets = sets;
 
+local marchTiers = { 600, 594, 587, 580, 573, 567, 560, 553, 546, 540, 533, 526, 519, 513, 506, 499, 492, 486, 479, 472, 465, 459, 452, 445, 0 }
+
 profile.Packer = {
     --{Name = 'Chonofuda', Quantity = 'all'},
 };
@@ -328,7 +330,6 @@ profile.HandleMidcast = function()
     local spell = gData.GetAction();
     local target = gData.GetActionTarget();
     local me = AshitaCore:GetMemoryManager():GetPlayer();
-    local singSkill = me:GetAttack();
     if (spell.Skill == 'Enhancing Magic') then
         gFunc.EquipSet(sets.Enhancing);
 
@@ -398,6 +399,7 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Harp);
         end
     end
+    -- Output skills
 end
 
 profile.HandlePreshot = function()

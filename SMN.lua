@@ -45,7 +45,7 @@ profile.Sets = {
 		Hands = "Smn. Bracers +1",
 		Back = "Summoner's Cape",
 		Waist = "Hierarch Belt",
-		Legs = "Summoner's Spats",
+		Legs = "Smn. Spats +1",
 		Feet = "Nashira Crackows",
 	},
 	perp = {
@@ -104,7 +104,7 @@ profile.Sets = {
 		Head = "Smn. Horn +1",
 		Hands = "Smn. Bracers +1",
 		Body = "Yinyang Robe",
-		Legs = "Summoner's Spats",
+		Legs = "Smn. Spats +1",
 		Feet = "Smn. Pigaches +1",
 	},
 	['sync40'] = {

@@ -515,8 +515,8 @@ function gcinclude.DoTeleRing()
 end
 
 function gcinclude.DoTavRing()
-
-	AshitaCore:GetChatManager():QueueCommand(1, '/lac equip ring2 "Tavnazian Ring"');
+	AshitaCore:GetChatManager():QueueCommand(-1, '/lac disable ring2');
+	AshitaCore:GetChatManager():QueueCommand(1, '/equip ring2 "Tavnazian Ring"');
 	local function usering()
 		AshitaCore:GetChatManager():QueueCommand(1, '/item "Tavnazian Ring" <me>');
 	end

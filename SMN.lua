@@ -15,22 +15,22 @@ local petMacroPage = {
 	["Fenrir"] = 9,
 	["Diabolos"] = 10,
 }
--- Phase, Acc, Eva
--- local fenrirChart = {
--- 	"New Moon" = [1, 31],
--- 	"Waxing Crescent" 	Acc-6 	Eva-26
--- 	Waxing Crescent 	Acc-11 	Eva-21
--- 	First Quarter Moon 	Acc-16 	Eva-16
--- 	Waxing Gibbous 	Acc-21 	Eva-11
--- 	Waxing Gibbous 	Acc-26 	Eva-6
--- 	Full Moon Acc-31 	Eva-1
--- 	Waning Gibbous 	Acc-26 	Eva-6
--- 	Waning Gibbous 	Acc-21 	Eva-11
--- 	Last Quarter Moon 	Acc-16 	Eva-16
--- 	Waning Crescent 	Acc-11 	Eva-21
--- 	Waning Crescent 	Acc-6 	Eva-26
+-- Phase [Acc, Eva]
+--   local fenrirCryChart = {
+--  "New Moon" = [1, 31],
+-- 	"Waxing Crescent" = [6, 26],
+-- 	"Waxing Crescent" = [11, 21],
+-- 	"First Quarter Moon" = [16, 16],
+-- 	"Waxing Gibbous" = [21, 11],
+-- 	"Waxing Gibbous" = [26, 6],
+-- 	"Full Moon" = [31, 1],
+-- 	"Waning Gibbous" = [26, 6],
+-- 	"Waning Gibbous" = [21, 11],
+-- 	"Last Quarter Moon" = [16, 16],
+-- 	"Waning Crescent" = [11, 21],
+-- 	"Waning Crescent" = [6, 26],
 
--- }
+--   }
 local profile = {}
 profile.Sets = {
 	Idle = {
@@ -297,7 +297,9 @@ profile.HandleDefault = function()
 	local player = gData.GetPlayer()
 	local pet = gData.GetPet()
 	local env = gData.GetEnvironment()
-
+    local moon_table = gcinclude.GetMoon();
+    local moon_phase = moon_table.MoonPhase;
+    local moon_percent = moon_table.MoonPhasePercent;
 	if (game.Time > 6.00) or (game.Time < 18.00) then
 		gFunc.EquipSet(profile.Sets.day);
 	else
@@ -314,6 +316,11 @@ profile.HandleDefault = function()
 		gFunc.Equip("main", gcinclude.staves[petElement])
 		if pet.Name == "Carbuncle" then
 			gFunc.Equip("hands", "Carbuncle Mitts")
+		end
+		if pet.Name == "Fenrir" then
+			-- local  =
+			print(chat.header('GCinclude'):append(chat.message("Lunar Cry: Acc-" .. moon_phase .. " Eva-" .. moon_percent)));
+			print(chat.header('GCinclude'):append(chat.message("Ecliptic Howl: Acc+" .. moon_phase .. " Eva+" .. moon_percent)));
 		end
 		if (env.DayElement == petElement) then --and (pet.Name ~= "Carbuncle")
 			-- print(chat.header('GCinclude'):append(chat.message("Day: " .. env.DayElement .. " Pet: " .. petElement)));

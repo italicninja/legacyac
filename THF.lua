@@ -6,12 +6,12 @@ local sets = {
     ['Idle'] = {
         Head = 'Emperor Hairpin',
         Neck = 'Peacock Amulet',
-        Ear1 = 'Beetle Earring +1',
-        Ear2 = 'Beetle Earring +1',
+        Ear1 = 'Spike Earring',
+        Ear2 = 'Spike Earring',
         Body = 'Rapparee Harness',
         Hands = 'Battle Gloves',
-        Ring1 = 'Sniper\'s Ring +1',
-        Ring2 = 'Sniper\'s Ring +1',
+        Ring1 = 'Toreador\'s Ring',
+        Ring2 = 'Toreador\'s Ring',
         Waist = 'Swift Belt',
         Legs = 'Republic Subligar',
         Feet = 'Leaping Boots',
@@ -22,11 +22,15 @@ local sets = {
     Idle_Refresh = {},
     Town = {
     },
-
     Dt = {
     },
-
+    Steal = {
+        Head = "Rogue's Bonnet",
+        Hands = "Rogue's Armlets",
+    },
     Tp_Default = {
+        Ring1 = 'Toreador\'s Ring',
+        Ring2 = 'Toreador\'s Ring',
     },
     Tp_Hybrid = {
     },
@@ -129,8 +133,8 @@ local sets = {
         Ear2 = 'Drone Earring',
         Body = 'Irn.Msk.Gmbsn. +1',
         Hands = 'Noct Gloves +1',
-        Ring1 = 'Sniper\'s Ring +1',
-        Ring2 = 'Sniper\'s Ring +1',
+        Ring1 = 'Toreador\'s Ring',
+        Ring2 = 'Toreador\'s Ring',
         Legs = 'Noct Brais +1',
         Feet = 'Leaping Boots',
     },

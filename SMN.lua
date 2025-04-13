@@ -163,10 +163,10 @@ profile.Sets = {
         Ear2 = 'Brutal Earring',
         Body = 'Yinyang Robe',
         Hands = 'Carbuncle Mitts',
-        Ring1 = 'Evoker\'s Ring',
-        Ring2 = 'Tamas Ring',
+        Ring1 = 'Toreador\'s Ring',
+        Ring2 = 'Rajas Ring',
         Back = 'Summoner\'s Cape',
-        Waist = 'Hierarch Belt',
+        Waist = 'Swift Belt',
 		Legs = "Hydra Brais",
         Feet = 'Evk. Pigaches +1',
     },
@@ -317,11 +317,11 @@ profile.HandleDefault = function()
 		if pet.Name == "Carbuncle" then
 			gFunc.Equip("hands", "Carbuncle Mitts")
 		end
-		if pet.Name == "Fenrir" then
+		--if pet.Name == "Fenrir" then
 			-- local  =
-			print(chat.header('GCinclude'):append(chat.message("Lunar Cry: Acc-" .. moon_phase .. " Eva-" .. moon_percent)));
-			print(chat.header('GCinclude'):append(chat.message("Ecliptic Howl: Acc+" .. moon_phase .. " Eva+" .. moon_percent)));
-		end
+			--print(chat.header('GCinclude'):append(chat.message("Lunar Cry: Acc-" .. moon_phase .. " Eva-" .. moon_percent)));
+			--print(chat.header('GCinclude'):append(chat.message("Ecliptic Howl: Acc+" .. moon_phase .. " Eva+" .. moon_percent)));
+		--end
 		if (env.DayElement == petElement) then --and (pet.Name ~= "Carbuncle")
 			-- print(chat.header('GCinclude'):append(chat.message("Day: " .. env.DayElement .. " Pet: " .. petElement)));
 			gFunc.Equip("body", 'Smn. Doublet +1')
@@ -338,6 +338,11 @@ profile.HandleAbility = function()
 	local action = gData.GetAction()
 	if action.Type:contains("Blood Pact") then
 		gFunc.EquipSet(profile.Sets.BPDelay)
+		print(chat.header('GCinclude'):append(chat.message(action.Type)));
+	end
+	if action.Type:contains("Rage") then
+		gFunc.EquipSet(profile.Sets.SummonSkill) -- Rage skills scale off Summoner Magic Skill on HorizonXI - https://discord.com/channels/933423693848260678/933752333668606002/1332425149806280795
+		print(chat.header('GCinclude'):append(chat.message(action.Type)));
 	end
 end
 

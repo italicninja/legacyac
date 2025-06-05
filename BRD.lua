@@ -1,6 +1,26 @@
-local profile = {};
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
+-- Create a base profile using the template
+local baseProfile = gcinclude.CreateBaseProfile();
+local profile = {};
+
+-- Copy base functions
+for k, v in pairs(baseProfile) do
+    profile[k] = v
+end
+
+-- Job-specific configuration
+profile.Config = {
+    MacroBook = 6,
+    MacroPage = 1
+}
+
+-- Override OnLoad to use our config
+profile.OnLoad = function()
+    baseProfile.OnLoad(profile.Config);
+end
+
+-- Define sets
 local sets = {
     Idle = {
         Main = gcinclude.staves["Earth"],
@@ -257,58 +277,36 @@ profile.Packer = {
     --{Name = 'Chonofuda', Quantity = 'all'},
 };
 
-profile.OnLoad = function()
-	gSettings.AllowAddSet = true;
-    gcinclude.Initialize();
-
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 6');
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-    -- AshitaCore:GetChatManager():QueueCommand(1, '/anon');
-end
-
-profile.OnUnload = function()
-    gcinclude.Unload();
-end
-
-profile.HandleCommand = function(args)
-    gcinclude.HandleCommands(args);
-end
-
+-- Override HandleDefault to add BRD-specific behavior
 profile.HandleDefault = function()
     gFunc.EquipSet(sets.Idle);
-	local player = gData.GetPlayer();
+    local player = gData.GetPlayer();
 
     if (player.Status == 'Engaged') then
         gFunc.EquipSet(sets.Tp_Default)
         if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
-			gFunc.EquipSet('Tp_' .. gcdisplay.GetCycle('MeleeSet')) end
-		if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
+            gFunc.EquipSet('Tp_' .. gcdisplay.GetCycle('MeleeSet')) end
+        if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
         if (gcdisplay.GetToggle('Fight') == false) then AshitaCore:GetChatManager():QueueCommand(1, '/fight') end
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Resting);
     elseif (player.IsMoving == true) then
-		gFunc.EquipSet(sets.Movement);
+        gFunc.EquipSet(sets.Movement);
     end
 
-    gcinclude.CheckDefault ();
+    gcinclude.CheckDefault();
     if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(sets.Dt) end;
     if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(sets.Movement) end;
 end
 
+-- BRD-specific ability handling
 profile.HandleAbility = function()
     -- local ability = gData.GetAction();
-
     -- if string.match(ability.Name, 'Troubadour') or string.match(ability.Name, 'Nightingale') or string.match(ability.Name, 'Soul Voice') then gFunc.EquipSet(sets.Nitro) end
-
     --gcinclude.CheckCancels();
 end
 
-profile.HandleItem = function()
-    local item = gData.GetAction();
-
-	if string.match(item.Name, 'Holy Water') then gFunc.EquipSet(gcinclude.sets.Holy_Water) end
-end
-
+-- Override HandlePrecast for BRD-specific behavior
 profile.HandlePrecast = function()
     local spell = gData.GetAction();
 

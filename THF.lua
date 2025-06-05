@@ -1,6 +1,24 @@
-local profile = {};
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
+-- Create a base profile using the template
+local baseProfile = gcinclude.CreateBaseProfile();
+local profile = {};
+
+-- Copy base functions
+for k, v in pairs(baseProfile) do
+    profile[k] = v
+end
+
+-- Job-specific configuration
+profile.Config = {
+    MacroBook = 11,
+    MacroPage = 1
+}
+
+-- Override OnLoad to use our config
+profile.OnLoad = function()
+    baseProfile.OnLoad(profile.Config);
+end
 
 local sets = {
     ['Idle'] = {
@@ -154,40 +172,24 @@ profile.Sets = sets;
 --     {Name = '1 Byne Bill', Quantity = 'all'},
 -- };
 
-profile.OnLoad = function()
-	gSettings.AllowAddSet = true;
-    gcinclude.Initialize();
-
-    --[[ Set you job macro defaults here]]
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 11');
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-end
-
-profile.OnUnload = function()
-    gcinclude.Unload();
-end
-
-profile.HandleCommand = function(args)
-    gcinclude.HandleCommands(args);
-end
-
+-- Override HandleDefault for THF-specific behavior
 profile.HandleDefault = function()
     gFunc.EquipSet(sets.Idle);
     local sa = gData.GetBuffCount('Sneak Attack');
     local ta = gData.GetBuffCount('Trick Attack');
-	
-	local player = gData.GetPlayer();
+
+    local player = gData.GetPlayer();
     if (player.Status == 'Engaged') then
         gFunc.EquipSet(sets.Tp_Default)
         if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
-			gFunc.EquipSet('Tp_' .. gcdisplay.GetCycle('MeleeSet')) end
+            gFunc.EquipSet('Tp_' .. gcdisplay.GetCycle('MeleeSet')) end
         if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Resting);
     elseif (player.IsMoving == true) then
-		gFunc.EquipSet(sets.Movement);
+        gFunc.EquipSet(sets.Movement);
     end
-	
+
     if (sa == 1) and (ta == 1) then
         gFunc.EquipSet('SATA');
     elseif (sa == 1) then
@@ -196,47 +198,27 @@ profile.HandleDefault = function()
         gFunc.EquipSet('TA');
     end
     
-    gcinclude.CheckDefault ();
+    gcinclude.CheckDefault();
     if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(sets.Dt) end;
     if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(sets.Movement) end;
 end
 
+-- THF-specific ability handling
 profile.HandleAbility = function()
     local ability = gData.GetAction();
-	if string.match(ability.Name, 'Flee') then
-		gFunc.EquipSet(sets.Flee);
-	end
+    if string.match(ability.Name, 'Flee') then
+        gFunc.EquipSet(sets.Flee);
+    end
 
     gcinclude.CheckCancels();
 end
 
-profile.HandleItem = function()
-    local item = gData.GetAction();
-
-	if string.match(item.Name, 'Holy Water') then gFunc.EquipSet(gcinclude.sets.Holy_Water) end
-end
-
-profile.HandlePrecast = function()
-    local spell = gData.GetAction();
-    gFunc.EquipSet(sets.Precast);
-
-    gcinclude.CheckCancels();
-end
-
+-- THF-specific midcast handling
 profile.HandleMidcast = function()
     if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
 end
 
-profile.HandlePreshot = function()
-    gFunc.EquipSet(sets.Preshot);
-end
-
-profile.HandleMidshot = function()
-    gFunc.EquipSet(sets.Midshot);
-    
-    if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
-end
-
+-- Override HandleWeaponskill for THF-specific behavior
 profile.HandleWeaponskill = function()
     local canWS = gcinclude.CheckWsBailout();
     if (canWS == false) then gFunc.CancelAction() return;

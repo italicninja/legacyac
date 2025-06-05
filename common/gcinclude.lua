@@ -1161,4 +1161,96 @@ function gcinclude.DebugChat(msg)
 	print(chat.header('GCinclude'):append(chat.message(msg)));
 end
 
+-- Create a base profile template with common handler functions
+function gcinclude.CreateBaseProfile()
+    local profile = {};
+
+    -- Common initialization
+    profile.OnLoad = function(config)
+        gSettings.AllowAddSet = true;
+        gcinclude.Initialize();
+
+        -- Set macros if provided in config
+        if config and config.MacroBook and config.MacroPage then
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro book ' .. config.MacroBook);
+            AshitaCore:GetChatManager():QueueCommand(1, '/macro set ' .. config.MacroPage);
+        end
+    end
+
+    -- Common cleanup
+    profile.OnUnload = function()
+        gcinclude.Unload();
+    end
+
+    -- Common command handling
+    profile.HandleCommand = function(args)
+        gcinclude.HandleCommands(args);
+    end
+
+    -- Common item handling
+    profile.HandleItem = function()
+        local item = gData.GetAction();
+        if string.match(item.Name, 'Holy Water') then gFunc.EquipSet(gcinclude.sets.Holy_Water) end
+    end
+
+    -- Common default handling (can be overridden by jobs)
+    profile.HandleDefault = function()
+        gFunc.EquipSet(profile.Sets.Idle);
+        local player = gData.GetPlayer();
+
+        if (player.Status == 'Engaged') then
+            gFunc.EquipSet(profile.Sets.Tp_Default)
+            if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
+                gFunc.EquipSet('Tp_' .. gcdisplay.GetCycle('MeleeSet'))
+            end
+            if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(profile.Sets.TH) end
+        elseif (player.Status == 'Resting') then
+            gFunc.EquipSet(profile.Sets.Resting);
+        elseif (player.IsMoving == true) then
+            gFunc.EquipSet(profile.Sets.Movement);
+        end
+
+        gcinclude.CheckDefault();
+        if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(profile.Sets.Dt) end;
+        if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(profile.Sets.Movement) end;
+    end
+
+    -- Common weaponskill handling
+    profile.HandleWeaponskill = function()
+        local canWS = gcinclude.CheckWsBailout();
+        if (canWS == false) then gFunc.CancelAction() return;
+        else
+            local ws = gData.GetAction();
+
+            gFunc.EquipSet(profile.Sets.Ws_Default)
+            if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
+                gFunc.EquipSet('Ws_' .. gcdisplay.GetCycle('MeleeSet'))
+            end
+
+            -- Job-specific WS handling should be added in the job file
+        end
+    end
+
+    -- Common precast handling
+    profile.HandlePrecast = function()
+        local spell = gData.GetAction();
+        gFunc.EquipSet(profile.Sets.Precast);
+
+        gcinclude.CheckCancels();
+    end
+
+    -- Common midshot handling
+    profile.HandleMidshot = function()
+        gFunc.EquipSet(profile.Sets.Midshot);
+        if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(profile.Sets.TH) end
+    end
+
+    -- Common preshot handling
+    profile.HandlePreshot = function()
+        gFunc.EquipSet(profile.Sets.Preshot);
+    end
+
+    return profile;
+end
+
 return gcinclude;

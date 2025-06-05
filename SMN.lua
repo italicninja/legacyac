@@ -2,6 +2,27 @@
 
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
+-- Create a base profile using the template
+local baseProfile = gcinclude.CreateBaseProfile();
+local profile = {};
+
+-- Copy base functions
+for k, v in pairs(baseProfile) do
+    profile[k] = v
+end
+
+-- Job-specific configuration
+profile.Config = {
+    MacroBook = 2,
+    MacroPage = 1
+}
+
+-- Override OnLoad to use our config
+profile.OnLoad = function()
+    baseProfile.OnLoad(profile.Config);
+    gSettings.AllowSyncEquip = false;
+end
+
 local bookSMN = 2  -- Macro Book for SMN
 local pageIdle = 1  -- Macro Page to Idle on
 
@@ -273,123 +294,112 @@ local function SetMacros(book, set)
 	AshitaCore:GetChatManager():QueueCommand(1, "/macro set " .. set)
 end
 
+-- Use the SetMacros function in our OnLoad
 profile.OnLoad = function()
-	gSettings.AllowAddSet = true
-	gSettings.AllowSyncEquip = false
-    gcinclude.Initialize();
-	SetMacros(bookSMN, pageIdle)
-	--AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 1');
+    baseProfile.OnLoad(profile.Config);
+    gSettings.AllowSyncEquip = false;
+    SetMacros(bookSMN, pageIdle);
+    --AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 1');
 end
 
-profile.OnUnload = function() end
-
-profile.HandleCommand = function(args)
-    gcinclude.HandleCommands(args);
-end
-
+-- Override HandleDefault for SMN-specific behavior
 profile.HandleDefault = function()
-	local game = gData.GetEnvironment();
-	local petAction = gData.GetPetAction()
-	if petAction ~= nil then
-		HandlePetAction(petAction)
-		return
-	end
-	local player = gData.GetPlayer()
-	local pet = gData.GetPet()
-	local env = gData.GetEnvironment()
+    local game = gData.GetEnvironment();
+    local petAction = gData.GetPetAction()
+    if petAction ~= nil then
+        HandlePetAction(petAction)
+        return
+    end
+    local player = gData.GetPlayer()
+    local pet = gData.GetPet()
+    local env = gData.GetEnvironment()
     local moon_table = gcinclude.GetMoon();
     local moon_phase = moon_table.MoonPhase;
     local moon_percent = moon_table.MoonPhasePercent;
-	if (game.Time > 6.00) or (game.Time < 18.00) then
-		gFunc.EquipSet(profile.Sets.day);
-	else
-		gFunc.EquipSet(profile.Sets.night);
-	end
-	if (player.Status == 'Engaged') then
+    if (game.Time > 6.00) or (game.Time < 18.00) then
+        gFunc.EquipSet(profile.Sets.day);
+    else
+        gFunc.EquipSet(profile.Sets.night);
+    end
+    if (player.Status == 'Engaged') then
         gFunc.EquipSet(profile.Sets.tp_default)
-	elseif player.Status == "Resting" then
-		gFunc.EquipSet(profile.Sets.hmp)
-	elseif pet == nil then
-		gFunc.EquipSet(profile.Sets.Idle)
-	else
-		gFunc.EquipSet(profile.Sets.perp)
-		gFunc.Equip("main", gcinclude.staves[petElement])
-		if pet.Name == "Carbuncle" then
-			gFunc.Equip("hands", "Carbuncle Mitts")
-		end
-		--if pet.Name == "Fenrir" then
-			-- local  =
-			--print(chat.header('GCinclude'):append(chat.message("Lunar Cry: Acc-" .. moon_phase .. " Eva-" .. moon_percent)));
-			--print(chat.header('GCinclude'):append(chat.message("Ecliptic Howl: Acc+" .. moon_phase .. " Eva+" .. moon_percent)));
-		--end
-		if (env.DayElement == petElement) then --and (pet.Name ~= "Carbuncle")
-			-- print(chat.header('GCinclude'):append(chat.message("Day: " .. env.DayElement .. " Pet: " .. petElement)));
-			gFunc.Equip("body", 'Smn. Doublet +1')
-		end
-		if env.WeatherElement == petElement then
-			gFunc.Equip("head", "Smn. Horn +1")
-		end
-
-	end
-	gcinclude.CheckDefault();
+    elseif player.Status == "Resting" then
+        gFunc.EquipSet(profile.Sets.hmp)
+    elseif pet == nil then
+        gFunc.EquipSet(profile.Sets.Idle)
+    else
+        gFunc.EquipSet(profile.Sets.perp)
+        gFunc.Equip("main", gcinclude.staves[petElement])
+        if pet.Name == "Carbuncle" then
+            gFunc.Equip("hands", "Carbuncle Mitts")
+        end
+        --if pet.Name == "Fenrir" then
+            -- local  =
+            --print(chat.header('GCinclude'):append(chat.message("Lunar Cry: Acc-" .. moon_phase .. " Eva-" .. moon_percent)));
+            --print(chat.header('GCinclude'):append(chat.message("Ecliptic Howl: Acc+" .. moon_phase .. " Eva+" .. moon_percent)));
+        --end
+        if (env.DayElement == petElement) then --and (pet.Name ~= "Carbuncle")
+            -- print(chat.header('GCinclude'):append(chat.message("Day: " .. env.DayElement .. " Pet: " .. petElement)));
+            gFunc.Equip("body", 'Smn. Doublet +1')
+        end
+        if env.WeatherElement == petElement then
+            gFunc.Equip("head", "Smn. Horn +1")
+        end
+    end
+    gcinclude.CheckDefault();
 end
 
+-- SMN-specific ability handling
 profile.HandleAbility = function()
-	local action = gData.GetAction()
-	if action.Type:contains("Blood Pact") then
-		gFunc.EquipSet(profile.Sets.BPDelay)
-		print(chat.header('GCinclude'):append(chat.message(action.Type)));
-	end
-	if action.Type:contains("Rage") then
-		gFunc.EquipSet(profile.Sets.SummonSkill) -- Rage skills scale off Summoner Magic Skill on HorizonXI - https://discord.com/channels/933423693848260678/933752333668606002/1332425149806280795
-		print(chat.header('GCinclude'):append(chat.message(action.Type)));
-	end
+    local action = gData.GetAction()
+    if action.Type:contains("Blood Pact") then
+        gFunc.EquipSet(profile.Sets.BPDelay)
+        print(chat.header('GCinclude'):append(chat.message(action.Type)));
+    end
+    if action.Type:contains("Rage") then
+        gFunc.EquipSet(profile.Sets.SummonSkill) -- Rage skills scale off Summoner Magic Skill on HorizonXI - https://discord.com/channels/933423693848260678/933752333668606002/1332425149806280795
+        print(chat.header('GCinclude'):append(chat.message(action.Type)));
+    end
 end
 
-profile.HandleItem = function() end
-
+-- Override HandlePrecast for SMN-specific behavior
 profile.HandlePrecast = function()
-	local action = gData.GetAction()
-	gFunc.EquipSet(profile.Sets.FastCast)
-	if action.Skill == "Summoning" then
+    local action = gData.GetAction()
+    gFunc.EquipSet(profile.Sets.FastCast)
+    if action.Skill == "Summoning" then
         gFunc.Equip("feet", "Evoker's Boots") -- -1 Summoning Cast Time
-	end
+    end
 end
 
+-- Override HandleMidcast for SMN-specific behavior
 profile.HandleMidcast = function()
-	local petAction = gData.GetPetAction()
-	if petAction ~= nil then
-		HandlePetAction(petAction)
-		return
-	end
-	local action = gData.GetAction()
+    local petAction = gData.GetPetAction()
+    if petAction ~= nil then
+        HandlePetAction(petAction)
+        return
+    end
+    local action = gData.GetAction()
 
-	gFunc.EquipSet(profile.Sets.MidCast)
+    gFunc.EquipSet(profile.Sets.MidCast)
 
-	if action.Name:contains("Cur") then
-		gFunc.EquipSet(profile.Sets.Cure)
-	elseif action.Name == "Stoneskin" then
-		gFunc.EquipSet(profile.Sets.Stoneskin)
-	elseif action.Skill == "Elemental Magic" then
-		gFunc.EquipSet(profile.Sets.Nuke)
-	elseif action.Skill == "Summoning" then
-		petElement = action.Element
-	elseif action.ActionType == "Spell" then
-		if (action.Name == 'Sneak') then
-			gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
-			gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
-		elseif (action.Name == 'Invisible') then
-			gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
-			gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
-		end
-		gFunc.Equip('main', gcinclude.staves[action.Element]);
-	end
+    if action.Name:contains("Cur") then
+        gFunc.EquipSet(profile.Sets.Cure)
+    elseif action.Name == "Stoneskin" then
+        gFunc.EquipSet(profile.Sets.Stoneskin)
+    elseif action.Skill == "Elemental Magic" then
+        gFunc.EquipSet(profile.Sets.Nuke)
+    elseif action.Skill == "Summoning" then
+        petElement = action.Element
+    elseif action.ActionType == "Spell" then
+        if (action.Name == 'Sneak') then
+            gFunc.Equip("feet", "Dream Boots +1") -- Sneak +1
+            gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
+        elseif (action.Name == 'Invisible') then
+            gFunc.Equip("hands", "Dream Mittens +1") -- Invis +1
+            gFunc.Equip("back", "Skulker\'s Cape") -- Sneak +1 // Invis +1
+        end
+        gFunc.Equip('main', gcinclude.staves[action.Element]);
+    end
 end
-
-profile.HandlePreshot = function() end
-
-profile.HandleMidshot = function() end
-
-profile.HandleWeaponskill = function() end
 
 return profile

@@ -121,6 +121,7 @@ local sets = {
         Neck = 'Justice Badge', -- 3 MND
         Body = 'Kirin\'s Osode', -- 10 All Stats
         Legs = 'Choral Cannions', -- 8 MND
+        Feet = 'Errant Pigaches', -- 5 MND
     },
     Cure = {
         main = gcinclude.staves["Light"],
@@ -218,22 +219,21 @@ local sets = {
         Head = "Brd. Roundlet +1",
         Body = "Minstrel's Coat",
         Hands = "Chl. Cuffs +1",
-        Legs = "Chl. Cannions +1",
+        Legs = "Choral Cannions", -- #TODO: Upgrade needed
         Feet = "Rostrum Pumps",
-        --Back = "Astute Cape",
+        Back = "Astute Cape",
         Neck = "Wind Torque",
-        Waist = "Gleeman's Belt",
+        Waist = "Swift Belt",
         Ear1 = "Beastly Earring,",
         Ear2 = "Musical Earring",
         Ring1 = "Minstrel's Ring",
-        Ring2 = "Angel's Ring",
     },
     Madrigal = {
         Range = 'Traversiere +1',
     },
     Ballad = { -- Buff Song: Ballad (Stack Haste)
         Main = "Chanter's Staff",
-        Range = 'Faerie Piccolo',
+        Range = 'Ebony Harp +2',
         Head = "Brd. Roundlet +1",
         Body = "Sha'ir Manteel",
         Hands = "Chl. Cuffs +1",

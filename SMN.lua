@@ -191,6 +191,22 @@ profile.Sets = {
 		Legs = "Hydra Brais",
         Feet = 'Evk. Pigaches +1',
     },
+    ['sync50'] = {
+        Main = 'Kukulcan\'s Staff',
+        Ammo = 'Fortune Egg',
+        Head = 'Horn Hairpin +1',
+        Neck = 'Peacock Amulet',
+        Ear1 = 'Drone Earring',
+        Ear2 = 'Drone Earring',
+        Body = 'Seer\'s Tunic +1',
+        Hands = 'Dream Mittens +1',
+        Ring1 = 'Astral Ring',
+        Ring2 = 'Ether Ring',
+        Back = 'Skulker\'s Cape',
+        Waist = 'Swift Belt',
+        Legs = 'Savage Loincloth',
+        Feet = 'Dream Boots +1',
+    },
 }
 
 profile.Packer = {}
@@ -354,11 +370,11 @@ profile.HandleAbility = function()
     local action = gData.GetAction()
     if action.Type:contains("Blood Pact") then
         gFunc.EquipSet(profile.Sets.BPDelay)
-        print(chat.header('GCinclude'):append(chat.message(action.Type)));
+        --print(chat.header('GCinclude'):append(chat.message(action.Type)));
     end
     if action.Type:contains("Rage") then
         gFunc.EquipSet(profile.Sets.SummonSkill) -- Rage skills scale off Summoner Magic Skill on HorizonXI - https://discord.com/channels/933423693848260678/933752333668606002/1332425149806280795
-        print(chat.header('GCinclude'):append(chat.message(action.Type)));
+        --print(chat.header('GCinclude'):append(chat.message(action.Type)));
     end
 end
 

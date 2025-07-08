@@ -29,6 +29,12 @@ gcinclude.sets = T{
 		Ring1 = 'Artificer\'s Ring',
 		Ring2 = 'Craftmaster\'s Ring',
     },
+    Clamming = { -- this set is for clamming, equip using /clam alias
+        Body = 'Mithra Top +1',
+        Legs = 'Mithra Shorts +1',
+        Hands = '',
+        Feet = '',
+    },
 	Zeni = { -- this set is meant as a default set for pictures, equip using /zeniset
 		Range = 'Soultrapper 2000',
 		Ammo = 'Blank Soulplate',
@@ -259,7 +265,7 @@ in each individual job lua file. Unless you know what you're doing then it is be
 gcdisplay = gFunc.LoadFile('common\\gcdisplay.lua');
 
 --gcinclude.AliasList = T{'gcmessages','wsdistance','setcycle','dt','th','kite','meleeset','gcdrain','gcaspir','nukeset','burst','weapon','elecycle','helix','weather','nuke','death','fight','sir','tankset','proc','cj','pupmode','tpgun','cormsg','forcestring','siphon','warpring','telering','rrset','craftset','zeniset','fishset', 'tavring'};
-gcinclude.AliasList = T{'gcmessages','meleeset','warpring','craftset', 'tavring', 'treat', 'mandy'};
+gcinclude.AliasList = T{'gcmessages','meleeset','warpring','craftset', 'tavring', 'treat', 'mandy', 'clam'};
 gcinclude.Towns = T{'Tavnazian Safehold','Al Zahbi','Aht Urhgan Whitegate','Nashmau','Southern San d\'Oria [S]','Bastok Markets [S]','Windurst Waters [S]','San d\'Oria-Jeuno Airship','Bastok-Jeuno Airship','Windurst-Jeuno Airship','Kazham-Jeuno Airship','Southern San d\'Oria','Northern San d\'Oria','Port San d\'Oria','Chateau d\'Oraguille','Bastok Mines','Bastok Markets','Port Bastok','Metalworks','Windurst Waters','Windurst Walls','Port Windurst','Windurst Woods','Heavens Tower','Ru\'Lude Gardens','Upper Jeuno','Lower Jeuno','Port Jeuno','Rabao','Selbina','Mhaura','Kazham','Norg','Mog Garden','Celennia Memorial Library','Western Adoulin','Eastern Adoulin'};
 gcinclude.LockingRings = T{'Echad Ring', 'Trizek Ring', 'Endorsement Ring', 'Capacity Ring', 'Warp Ring','Facility Ring','Dim. Ring (Dem)','Dim. Ring (Mea)','Dim. Ring (Holla)'};
 gcinclude.DistanceWS = T{'Flaming Arrow','Piercing Arrow','Dulling Arrow','Sidewinder','Blast Arrow','Arching Arrow','Empyreal Arrow','Refulgent Arrow','Apex Arrow','Namas Arrow','Jishnu\'s Randiance','Hot Shot','Split Shot','Sniper Shot','Slug Shot','Blast Shot','Heavy Shot','Detonator','Numbing Shot','Last Stand','Coronach','Wildfire','Trueflight','Leaden Salute','Myrkr','Dagan','Moonlight','Starlight'};
@@ -449,7 +455,12 @@ function gcinclude.HandleCommands(args)
 		gcinclude.FishSet = not gcinclude.FishSet;
 		toggle = 'Fishing Set';
 		status = gcinclude.FishSet;
-    end
+	elseif (args[1] == 'clam') then
+		AshitaCore:GetChatManager():QueueCommand(1, '/addon load hxiclam');
+		gcinclude.Clamming = not gcinclude.Clamming;
+		toggle = 'Clamming Set';
+		status =  gcinclude.Clamming;
+	   end
 	if (player.MainJob == 'RDM') or (player.MainJob == 'BLM') or (player.MainJob == 'SCH') or (player.MainJob == 'GEO') then
 		if (args[1] == 'nukeset') then
 			gcdisplay.AdvanceCycle('NukeSet');
@@ -727,7 +738,7 @@ function gcinclude.DoTreat()
 	end
 	usermain:once(31); -- Execute after 31s?
 
-	AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable main');
+	AshitaCore:GetChatManager():QueueCommand(33, '/lac enable main');
 end
 
 function gcinclude.DoMandy()

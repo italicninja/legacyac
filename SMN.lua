@@ -81,6 +81,7 @@ profile.Sets = {
 		Body = "Errant Hpl.",
 		Legs = "Hydra Brais",
 		Ear1 = "Magnetic Earring",
+		Ear2 = "Relaxing Earring",
 	},
 	Nuke = {
 		Hands = "Nashira Gages", -- MaCC

@@ -1,13 +1,7 @@
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
 -- Create a base profile using the template
-local baseProfile = gcinclude.CreateBaseProfile();
-local profile = {};
-
--- Copy base functions
-for k, v in pairs(baseProfile) do
-    profile[k] = v
-end
+local profile = gcinclude.CreateBaseProfile();
 
 -- Job-specific configuration
 profile.Config = {
@@ -15,12 +9,8 @@ profile.Config = {
     MacroPage = 1
 }
 
--- Override OnLoad to use our config
-profile.OnLoad = function()
-    baseProfile.OnLoad(profile.Config);
-end
-
-local sets = {
+-- Define sets first
+profile.Sets = {
     ['Idle'] = {
         Head = 'Emperor Hairpin',
         Neck = 'Peacock Amulet',
@@ -157,7 +147,6 @@ local sets = {
         Feet = 'Leaping Boots',
     },
 };
-profile.Sets = sets;
 
 -- profile.Packer = {
 --     'Odious Blood',
@@ -174,40 +163,40 @@ profile.Sets = sets;
 
 -- Override HandleDefault for THF-specific behavior
 profile.HandleDefault = function()
-    gFunc.EquipSet(sets.Idle);
+    gFunc.EquipSet(profile.Sets.Idle);
     local sa = gData.GetBuffCount('Sneak Attack');
     local ta = gData.GetBuffCount('Trick Attack');
 
     local player = gData.GetPlayer();
     if (player.Status == 'Engaged') then
-        gFunc.EquipSet(sets.Tp_Default)
+        gFunc.EquipSet(profile.Sets.Tp_Default)
         if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
             gFunc.EquipSet('Tp_' .. gcdisplay.GetCycle('MeleeSet')) end
-        if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
+        if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(profile.Sets.TH) end
     elseif (player.Status == 'Resting') then
-        gFunc.EquipSet(sets.Resting);
+        gFunc.EquipSet(profile.Sets.Resting);
     elseif (player.IsMoving == true) then
-        gFunc.EquipSet(sets.Movement);
+        gFunc.EquipSet(profile.Sets.Movement);
     end
 
     if (sa == 1) and (ta == 1) then
-        gFunc.EquipSet('SATA');
+        gFunc.EquipSet(profile.Sets.SATA);
     elseif (sa == 1) then
-        gFunc.EquipSet('SA');
+        gFunc.EquipSet(profile.Sets.SA);
     elseif (ta == 1) then
-        gFunc.EquipSet('TA');
+        gFunc.EquipSet(profile.Sets.TA);
     end
     
     gcinclude.CheckDefault();
-    if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(sets.Dt) end;
-    if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(sets.Movement) end;
+    if (gcdisplay.GetToggle('DTset') == true) then gFunc.EquipSet(profile.Sets.Dt) end;
+    if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet(profile.Sets.Movement) end;
 end
 
 -- THF-specific ability handling
 profile.HandleAbility = function()
     local ability = gData.GetAction();
     if string.match(ability.Name, 'Flee') then
-        gFunc.EquipSet(sets.Flee);
+        gFunc.EquipSet(profile.Sets.Flee);
     end
 
     gcinclude.CheckCancels();
@@ -215,7 +204,7 @@ end
 
 -- THF-specific midcast handling
 profile.HandleMidcast = function()
-    if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(sets.TH) end
+    if (gcdisplay.GetToggle('TH') == true) then gFunc.EquipSet(profile.Sets.TH) end
 end
 
 -- Override HandleWeaponskill for THF-specific behavior
@@ -227,7 +216,7 @@ profile.HandleWeaponskill = function()
         local sa = gData.GetBuffCount('Sneak Attack');
         local ta = gData.GetBuffCount('Trick Attack');
     
-        gFunc.EquipSet(sets.Ws_Default)
+        gFunc.EquipSet(profile.Sets.Ws_Default)
         if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
         gFunc.EquipSet('Ws_' .. gcdisplay.GetCycle('MeleeSet')) end
         if (sa == 1) and (ta == 1) then
@@ -239,7 +228,7 @@ profile.HandleWeaponskill = function()
         end
 
         if string.match(ws.Name, 'Evisceration') then
-            gFunc.EquipSet(sets.Evis_Default)
+            gFunc.EquipSet(profile.Sets.Evis_Default)
             if (gcdisplay.GetCycle('MeleeSet') ~= 'Default') then
             gFunc.EquipSet('Evis_' .. gcdisplay.GetCycle('MeleeSet')); end
             if (sa == 1) and (ta == 1) then

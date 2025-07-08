@@ -38,13 +38,14 @@ local sets = {
         Feet = 'Rostrum Pumps',
         Range = 'Hamelin Flute',
     },
-    Resting = {
-        Main = gcinclude.staves["Dark"],
+	Resting = {
+		Main = gcinclude.staves['Dark'],
 		Neck = "Checkered Scarf",
 		Body = "Errant Hpl.",
 		Legs = "Hydra Brais",
 		Ear1 = "Magnetic Earring",
-    },
+		Ear2 = "Relaxing Earring",
+	},
     Idle_Regen = { },
     Idle_Refresh = { },
 	Town = {
@@ -146,21 +147,31 @@ local sets = {
         Range = 'Ebony Harp +2',
     },
     Lullaby = { -- Debuff Song: Lullaby (Stack CHR) *Includes Haste gear*
-        Range = 'Nursemaid\'s Harp',
-        Body = 'Kirin\'s Osode',
+        Range = 'Nursemaid\'s Harp', -- +2 Lullaby
+        Body = 'Kirin\'s Osode', -- CHR
+        Legs = "Byakko\'s haidate", -- Haste
+        Waist = "Swift Belt", -- Haste
     },
     Buff = { },
     Paeon = { -- Buff Song: Paeon (Stack Singing/String Skill) *Includes Haste gear*
         Range = 'Ebony Harp +2',
+        Legs = "Byakko\'s haidate", -- Haste
+        Waist = "Swift Belt", -- Haste
     },
 	Minne = { -- Buff Song: Minuet (Stack Singing/Wind Skill) *Includes Haste gear*
         Range = 'Maple Harp +1',
+        Legs = "Byakko\'s haidate", -- Haste
+        Waist = "Swift Belt", -- Haste
     },
     Mazurka = { -- Buff Song: Mazurka (--) *Includes Haste gear*
         Range = 'Harlequin\'s Horn',
+        Legs = "Byakko\'s haidate", -- Haste
+        Waist = "Swift Belt", -- Haste
     },
     Etude = { -- Buff Song: Etude (Stack Singing/String Skill) *Includes Haste gear*
         Range = 'Rose Harp +1',
+        Legs = "Byakko\'s haidate", -- Haste
+        Waist = "Swift Belt", -- Haste
     },
     Elegy = { -- Debuff Song: Elegy (Stack CHR & Singing/Wind Skill) *Includes Haste gear*
         Main = "Chanter's Staff",
@@ -223,7 +234,7 @@ local sets = {
         Feet = "Rostrum Pumps",
         Back = "Astute Cape",
         Neck = "Wind Torque",
-        Waist = "Swift Belt",
+        Waist = "Swift Belt", -- Haste
         Ear1 = "Beastly Earring,",
         Ear2 = "Musical Earring",
         Ring1 = "Minstrel's Ring",
@@ -237,11 +248,11 @@ local sets = {
         Head = "Brd. Roundlet +1",
         Body = "Sha'ir Manteel",
         Hands = "Chl. Cuffs +1",
-        Legs = "Chl. Cannions +1",
         Feet = "Sha'ir Crackows",
         Back = "Astute Cape",
         Neck = "Wind Torque",
-        Waist = "Swift Belt",
+        Legs = "Byakko\'s haidate", -- Haste
+        Waist = "Swift Belt", -- Haste
         Ear1 = "Beastly Earring,",
         Ear2 = "Musical Earring",
         Ring1 = "Angel's Ring",

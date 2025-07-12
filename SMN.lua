@@ -115,6 +115,7 @@ profile.Sets = {
 		Hands = "Smn. Bracers +1",
 		Ring1 = "Evoker's Ring",
 		Feet = "Nashira Crackows",
+		Back = "Astute Cape",
 	},
 	petMacc = {
 		Head = "Evoker's Horn",
@@ -298,6 +299,7 @@ local function HandlePetAction(PetAction)
 	if MagicBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.petMAB)
 	elseif PhysBP:contains(BPName) then
+		gFunc.EquipSet(profile.Sets.SummonSkill) -- SMN Skill adds Damage in HorizonXI
 		gFunc.EquipSet(profile.Sets.petAtk)
 	elseif BuffBP:contains(BPName) then
 		gFunc.EquipSet(profile.Sets.SummonSkill)
